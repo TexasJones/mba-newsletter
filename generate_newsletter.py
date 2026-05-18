@@ -1,27 +1,33 @@
 """
-MBA Newsletter Generator — 100% Free Version
-Uses RSS feeds from Google News and other free sources.
+Chris's MBA Insider News — Weekly Newsletter Generator
+100% Free: Google News RSS feeds + GitHub Actions
 No API keys, no accounts, no cost.
-Runs via GitHub Actions every Monday and saves an HTML file.
 """
 
+import os
 import re
 import urllib.request
-import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from html import escape, unescape
 
-# ── RSS Feed Sources per Topic ────────────────────────────────────────────────
-# Google News RSS supports any search query — completely free, no key needed.
+# ── Burnt Orange color palette (UT Austin) ────────────────────────────────────
+BRAND = {
+    "primary":    "#BF5700",   # UT burnt orange
+    "primary_dk": "#8B3E00",   # darker burnt orange
+    "primary_lt": "#F8EDE3",   # light orange tint
+    "accent":     "#333F48",   # dark slate
+    "bg":         "#FAF7F4",   # warm off-white page background
+}
 
+# ── Topics ────────────────────────────────────────────────────────────────────
 TOPICS = [
     {
         "id": "coaching",
         "label": "MBA & Career Coaching",
-        "color": "#1d4ed8",
-        "bg": "#eff6ff",
-        "border": "#bfdbfe",
+        "color": "#BF5700",
+        "bg": "#FDF0E8",
+        "border": "#F4C6A0",
         "icon": "🎓",
         "feeds": [
             "https://news.google.com/rss/search?q=MBA+career+coaching&hl=en-US&gl=US&ceid=US:en",
@@ -66,7 +72,7 @@ TOPICS = [
     },
     {
         "id": "workingpro",
-        "label": "MBA for Working Professionals & Career Coaching",
+        "label": "MBA for Working Professionals",
         "color": "#be185d",
         "bg": "#fdf2f8",
         "border": "#fbcfe8",
@@ -76,19 +82,64 @@ TOPICS = [
             "https://news.google.com/rss/search?q=part+time+MBA+working+professional+career&hl=en-US&gl=US&ceid=US:en",
         ],
     },
+    {
+        "id": "execed",
+        "label": "MBA & Executive Education",
+        "color": "#0369a1",
+        "bg": "#f0f9ff",
+        "border": "#bae6fd",
+        "icon": "🏛️",
+        "feeds": [
+            "https://news.google.com/rss/search?q=MBA+executive+education&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=executive+MBA+program+trends&hl=en-US&gl=US&ceid=US:en",
+        ],
+    },
+    {
+        "id": "roi",
+        "label": "MBA Return on Investment",
+        "color": "#15803d",
+        "bg": "#f0fdf4",
+        "border": "#bbf7d0",
+        "icon": "📈",
+        "feeds": [
+            "https://news.google.com/rss/search?q=MBA+return+on+investment+salary&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=MBA+worth+it+ROI+2026&hl=en-US&gl=US&ceid=US:en",
+        ],
+    },
+    {
+        "id": "online",
+        "label": "MBA Online Programs",
+        "color": "#0891b2",
+        "bg": "#ecfeff",
+        "border": "#a5f3fc",
+        "icon": "💻",
+        "feeds": [
+            "https://news.google.com/rss/search?q=MBA+online+programs+2026&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=online+MBA+rankings+trends&hl=en-US&gl=US&ceid=US:en",
+        ],
+    },
+    {
+        "id": "networking",
+        "label": "MBA & Networking",
+        "color": "#6d28d9",
+        "bg": "#f5f3ff",
+        "border": "#c4b5fd",
+        "icon": "🤝",
+        "feeds": [
+            "https://news.google.com/rss/search?q=MBA+networking+career&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=business+school+alumni+networking&hl=en-US&gl=US&ceid=US:en",
+        ],
+    },
 ]
 
 # ── RSS Fetching ──────────────────────────────────────────────────────────────
 
 def clean_html(raw: str) -> str:
-    """Strip HTML tags and decode HTML entities."""
     text = re.sub(r"<[^>]+>", "", raw or "")
-    text = unescape(text)  # fix &amp; &#39; &quot; etc
+    text = unescape(text)
     return text.strip()
 
-
-def fetch_feed(url: str, max_items: int = 5) -> list[dict]:
-    """Fetch and parse an RSS feed, returning a list of article dicts."""
+def fetch_feed(url: str, max_items: int = 5) -> list:
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=15) as resp:
@@ -99,7 +150,6 @@ def fetch_feed(url: str, max_items: int = 5) -> list[dict]:
         return []
 
     articles = []
-    # Handle both RSS <item> and Atom <entry> formats
     items = root.findall(".//item") or root.findall(".//{http://www.w3.org/2005/Atom}entry")
 
     for item in items[:max_items]:
@@ -114,7 +164,6 @@ def fetch_feed(url: str, max_items: int = 5) -> list[dict]:
         description = clean_html(get("description") or get("summary"))
         pub_date = get("pubDate") or get("published") or get("updated")
 
-        # Parse and format the date nicely
         formatted_date = ""
         for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S %Z",
                     "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S%z"):
@@ -125,15 +174,11 @@ def fetch_feed(url: str, max_items: int = 5) -> list[dict]:
             except ValueError:
                 continue
 
-        # Skip items with no title or link
         if not title or not link:
             continue
-
-        # Truncate description to ~200 chars
         if len(description) > 220:
             description = description[:217].rsplit(" ", 1)[0] + "…"
 
-        # Extract source name from Google News titles (format: "Headline - Source")
         source = ""
         if " - " in title:
             parts = title.rsplit(" - ", 1)
@@ -141,169 +186,262 @@ def fetch_feed(url: str, max_items: int = 5) -> list[dict]:
             source = parts[1].strip()
 
         articles.append({
-            "title": title,
-            "url": link,
-            "description": description,
-            "source": source,
-            "date": formatted_date,
+            "title": title, "url": link,
+            "description": description, "source": source, "date": formatted_date,
         })
-
     return articles
 
-
-def fetch_topic(topic: dict, max_per_feed: int = 4) -> list[dict]:
-    """Fetch articles for a topic from all its feeds, deduplicated."""
+def fetch_topic(topic: dict, max_per_feed: int = 4) -> list:
     print(f"  Fetching: {topic['label']}...")
-    seen_titles = set()
-    results = []
+    seen, results = set(), []
     for feed_url in topic["feeds"]:
         for article in fetch_feed(feed_url, max_per_feed):
             key = article["title"].lower()[:60]
-            if key not in seen_titles:
-                seen_titles.add(key)
+            if key not in seen:
+                seen.add(key)
                 results.append(article)
         if len(results) >= 6:
             break
     print(f"    → {len(results)} articles found")
     return results[:6]
 
-
 # ── HTML Generation ───────────────────────────────────────────────────────────
 
-def article_card_html(article: dict, color: str) -> str:
-    title_escaped = escape(article["title"])
-    desc_escaped = escape(article["description"]) if article["description"] else ""
-    url = escape(article["url"])
-    source = escape(article["source"]) if article["source"] else ""
-    date = escape(article["date"]) if article["date"] else ""
+def article_card_html(article: dict, color: str, topic_id: str) -> str:
+    t = escape(article["title"])
+    d = escape(article["description"]) if article["description"] else ""
+    u = escape(article["url"])
+    s = escape(article["source"]) if article["source"] else ""
+    dt = escape(article["date"]) if article["date"] else ""
 
     meta_parts = []
-    if source:
-        meta_parts.append(f'<span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">{source}</span>')
-    if date:
-        meta_parts.append(f'<span style="font-size:11px;color:#94a3b8;">{date}</span>')
-    if url:
-        meta_parts.append(f'<a href="{url}" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:{color};text-decoration:none;font-weight:700;" onmouseover="this.style.opacity=\'0.7\'" onmouseout="this.style.opacity=\'1\'">Read article →</a>')
-
+    if s:
+        meta_parts.append(f'<span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">{s}</span>')
+    if dt:
+        meta_parts.append(f'<span style="font-size:11px;color:#94a3b8;">{dt}</span>')
+    if u:
+        meta_parts.append(f'<a href="{u}" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:{color};text-decoration:none;font-weight:700;" onmouseover="this.style.opacity=\'0.7\'" onmouseout="this.style.opacity=\'1\'">Read article →</a>')
     meta_html = ' <span style="color:#e2e8f0;">·</span> '.join(meta_parts)
 
-    return f"""
-    <div style="background:#fff;border:1px solid #e2e8f0;border-left:4px solid {color};
-         border-radius:8px;padding:16px 18px;margin-bottom:12px;transition:box-shadow 0.2s;"
-         onmouseover="this.style.boxShadow='0 4px 14px rgba(0,0,0,0.09)';this.style.background='#f8fafc'"
-         onmouseout="this.style.boxShadow='none';this.style.background='#fff'">
-      <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-        <a href="{url}" target="_blank" rel="noopener noreferrer"
-           style="color:{color};text-decoration:none;"
-           onmouseover="this.style.textDecoration='underline'"
-           onmouseout="this.style.textDecoration='none'">{title_escaped}</a>
-      </div>
-      {"<p style='font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;'>" + desc_escaped + "</p>" if desc_escaped else ""}
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-        {meta_html}
-      </div>
-    </div>"""
+    desc_html = f'<p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">{d}</p>' if d else ""
 
+    return f"""<div class="article-card" data-topic="{topic_id}" data-text="{t.lower()} {s.lower()} {d.lower()}"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid {color};border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="{u}" target="_blank" rel="noopener noreferrer"
+       style="color:{color};text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">{t}</a>
+  </div>
+  {desc_html}
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">{meta_html}</div>
+</div>"""
 
-def topic_section_html(topic: dict, articles: list[dict]) -> str:
+def toc_html(results: list) -> str:
+    links = []
+    for r in results:
+        t = r["topic"]
+        count = len(r["articles"])
+        links.append(
+            f'<a href="#{t["id"]}" style="display:inline-flex;align-items:center;gap:6px;'
+            f'background:{t["bg"]};border:1px solid {t["border"]};color:{t["color"]};'
+            f'border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;'
+            f'text-decoration:none;white-space:nowrap;">'
+            f'{t["icon"]} {escape(t["label"])} <span style="background:{t["color"]};color:#fff;'
+            f'border-radius:10px;padding:1px 7px;font-size:11px;">{count}</span></a>'
+        )
+    return '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">' + "".join(links) + '</div>'
+
+def topic_section_html(topic: dict, articles: list) -> str:
     count = f'{len(articles)} article{"s" if len(articles) != 1 else ""} found'
     if articles:
-        cards = "".join(article_card_html(a, topic["color"]) for a in articles)
+        cards = "".join(article_card_html(a, topic["color"], topic["id"]) for a in articles)
     else:
         cards = '<p style="text-align:center;color:#94a3b8;font-size:13px;padding:20px 0;">No articles found this week.</p>'
-
-    return f"""
-  <div style="margin-bottom:44px;">
-    <div style="display:flex;align-items:center;gap:12px;background:{topic["bg"]};
-         border:1px solid {topic["border"]};border-radius:10px;padding:14px 20px;margin-bottom:18px;">
-      <span style="font-size:24px;">{topic["icon"]}</span>
-      <div>
-        <div style="font-size:16px;font-weight:800;color:{topic["color"]};font-family:Georgia,serif;">
-          {escape(topic["label"])}
-        </div>
-        <div style="font-size:12px;color:#64748b;margin-top:2px;">{count}</div>
+    return f"""<div id="{topic['id']}" style="margin-bottom:44px;">
+  <div style="display:flex;align-items:center;gap:12px;background:{topic["bg"]};
+       border:1px solid {topic["border"]};border-radius:10px;padding:14px 20px;margin-bottom:18px;">
+    <span style="font-size:24px;">{topic["icon"]}</span>
+    <div>
+      <div style="font-size:16px;font-weight:800;color:{topic["color"]};font-family:Georgia,serif;">
+        {escape(topic["label"])}
       </div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">{count}</div>
     </div>
-    {cards}
-  </div>"""
+    <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
+       onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
+  </div>
+  {cards}
+</div>"""
 
-
-def build_html(results: list[dict], generated_at: str) -> str:
+def build_html(results: list, generated_at: str) -> str:
     today = datetime.now().strftime("%B %d, %Y")
     total = sum(len(r["articles"]) for r in results)
     sections = "".join(topic_section_html(r["topic"], r["articles"]) for r in results)
+    toc = toc_html(results)
+
+    # Build flat article list for search (all topics)
+    all_cards = "\n".join(
+        article_card_html(a, r["topic"]["color"], r["topic"]["id"])
+        for r in results for a in r["articles"]
+    )
 
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The MBA Insider – {today}</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Chris's MBA Insider News – {today}</title>
   <style>
-    * {{ box-sizing: border-box; }}
-    body {{ margin:0; padding:0; background:#f1f5f9; font-family:Georgia,'Times New Roman',serif; }}
-    a {{ cursor:pointer; }}
-    @media (max-width:600px) {{ .main {{ padding:20px !important; }} }}
+    *{{box-sizing:border-box;}}
+    body{{margin:0;padding:0;background:{BRAND["bg"]};font-family:Georgia,'Times New Roman',serif;}}
+    a{{cursor:pointer;}}
+    #search-box{{width:100%;padding:12px 18px 12px 44px;font-size:14px;border:2px solid #e8e0d8;
+      border-radius:8px;font-family:Georgia,serif;outline:none;background:#fff;
+      transition:border-color 0.2s;}}
+    #search-box:focus{{border-color:{BRAND["primary"]};}}
+    .search-wrap{{position:relative;margin-bottom:24px;}}
+    .search-icon{{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none;}}
+    .no-results{{display:none;text-align:center;color:#94a3b8;padding:32px;font-size:14px;}}
+    @media(max-width:600px){{.main{{padding:20px !important;}} h1{{font-size:26px !important;}}}}
   </style>
 </head>
 <body>
-  <div style="max-width:740px;margin:36px auto;padding:0 16px 60px;">
+<div id="top" style="max-width:760px;margin:32px auto;padding:0 16px 60px;">
 
-    <!-- Masthead -->
-    <div style="background:#0f172a;border-radius:14px 14px 0 0;padding:36px 36px 28px;text-align:center;">
-      <div style="font-size:10px;font-family:monospace;color:#64748b;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;">
+  <!-- ── Masthead ── -->
+  <div style="background:linear-gradient(135deg,{BRAND["primary_dk"]} 0%,{BRAND["primary"]} 60%,#D4621A 100%);
+       border-radius:16px 16px 0 0;padding:40px 36px 32px;text-align:center;position:relative;overflow:hidden;">
+    <!-- decorative circles -->
+    <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;
+         border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+    <div style="position:absolute;bottom:-60px;left:-30px;width:220px;height:220px;
+         border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+    <div style="position:relative;">
+      <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.5);
+           letter-spacing:0.25em;text-transform:uppercase;margin-bottom:14px;">
         Weekly Intelligence Brief
       </div>
-      <h1 style="margin:0 0 8px;font-size:36px;font-weight:900;color:#f8fafc;letter-spacing:-0.02em;line-height:1.1;">
-        The MBA Insider
+      <h1 style="margin:0 0 6px;font-size:38px;font-weight:900;color:#fff;
+           letter-spacing:-0.02em;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,0.2);">
+        Chris's MBA Insider News
       </h1>
-      <div style="font-size:13px;color:#64748b;margin-bottom:20px;letter-spacing:0.04em;">
-        Career Coaching · Career Advising · Artificial Intelligence
+      <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:22px;letter-spacing:0.05em;">
+        Career Coaching · Career Advising · AI · Executive Ed · Networking
       </div>
-      <div style="display:inline-block;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
-           border-radius:6px;padding:6px 16px;font-size:12px;color:#cbd5e1;font-family:monospace;">
-        {today}
-      </div>
-    </div>
-
-    <!-- Body -->
-    <div class="main" style="background:#fff;border-radius:0 0 14px 14px;
-         box-shadow:0 8px 32px rgba(0,0,0,0.08);padding:36px;">
-
-      <!-- Stats bar -->
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;padding:14px 18px;
-           background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;">
-        <span style="font-size:13px;color:#475569;">📰 <strong>{total} articles</strong> curated</span>
-        <span style="font-size:13px;color:#94a3b8;">·</span>
-        <span style="font-size:13px;color:#475569;">🗂 <strong>{len(results)} topics</strong> covered</span>
-        <span style="font-size:13px;color:#94a3b8;">·</span>
-        <span style="font-size:13px;color:#475569;">🕐 Generated {generated_at}</span>
-      </div>
-
-      <div style="border-top:1px solid #e2e8f0;margin-bottom:36px;"></div>
-
-      {sections}
-
-      <!-- Footer -->
-      <div style="border-top:2px solid #0f172a;padding-top:20px;margin-top:8px;text-align:center;">
-        <div style="font-size:12px;color:#94a3b8;line-height:1.8;">
-          <strong style="color:#475569;">The MBA Insider</strong> · Auto-generated weekly newsletter · {today}<br/>
-          Powered by Google News RSS feeds · Click any headline to read the full article.<br/>
-          <span style="color:#cbd5e1;">100% free · No API keys · Runs on GitHub Actions</span>
+      <div style="display:inline-flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;">
+        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+             border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
+          📅 {today}
+        </div>
+        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
+             border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
+          📰 {total} articles · {len(results)} topics
         </div>
       </div>
-
     </div>
   </div>
+
+  <!-- ── Body ── -->
+  <div class="main" style="background:#fff;border-radius:0 0 16px 16px;
+       box-shadow:0 8px 40px rgba(191,87,0,0.1);padding:36px;">
+
+    <!-- Search bar -->
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input id="search-box" type="text" placeholder="Search all articles by keyword, source, or topic…"
+             oninput="filterArticles(this.value)"/>
+    </div>
+
+    <!-- Table of Contents -->
+    <div id="toc-section">
+      <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;
+           letter-spacing:0.1em;margin-bottom:10px;">Jump to section</div>
+      {toc}
+    </div>
+
+    <div style="border-top:2px solid {BRAND["primary_lt"]};margin-bottom:36px;"></div>
+
+    <!-- Search results view (hidden by default) -->
+    <div id="search-results" style="display:none;">
+      <div style="font-size:13px;color:#64748b;margin-bottom:16px;">
+        Showing results for: <strong id="search-term" style="color:{BRAND["primary"]};"></strong>
+        <span id="result-count" style="color:#94a3b8;margin-left:8px;"></span>
+      </div>
+      <div id="search-cards">{all_cards}</div>
+      <div class="no-results" id="no-results-msg">No articles found matching your search.</div>
+    </div>
+
+    <!-- Normal topic sections -->
+    <div id="topic-sections">
+      {sections}
+    </div>
+
+    <!-- Footer -->
+    <div style="border-top:3px solid {BRAND["primary"]};padding-top:22px;margin-top:8px;text-align:center;">
+      <div style="font-size:13px;font-weight:800;color:{BRAND["primary"]};margin-bottom:4px;">
+        Chris's MBA Insider News
+      </div>
+      <div style="font-size:12px;color:#94a3b8;line-height:1.9;">
+        Auto-generated weekly · {today} · Generated {generated_at}<br/>
+        Powered by Google News RSS · Click any headline to read the original article.<br/>
+        <span style="color:#cbd5e1;">100% free · No API keys · Runs automatically on GitHub Actions</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // All article cards for search (stored as data attributes)
+  const allCards = document.querySelectorAll('#search-cards .article-card');
+
+  function filterArticles(query) {{
+    const q = query.trim().toLowerCase();
+    const topicSections = document.getElementById('topic-sections');
+    const searchResults = document.getElementById('search-results');
+    const tocSection = document.getElementById('toc-section');
+    const searchTerm = document.getElementById('search-term');
+    const resultCount = document.getElementById('result-count');
+    const noResults = document.getElementById('no-results-msg');
+
+    if (!q) {{
+      // Show normal view
+      topicSections.style.display = 'block';
+      searchResults.style.display = 'none';
+      tocSection.style.display = 'block';
+      return;
+    }}
+
+    // Switch to search view
+    topicSections.style.display = 'none';
+    tocSection.style.display = 'none';
+    searchResults.style.display = 'block';
+    searchTerm.textContent = query;
+
+    let visible = 0;
+    allCards.forEach(card => {{
+      const text = card.getAttribute('data-text') || '';
+      const match = text.includes(q);
+      card.style.display = match ? 'block' : 'none';
+      if (match) visible++;
+    }});
+
+    resultCount.textContent = visible > 0 ? `(${{visible}} article${{visible !== 1 ? 's' : ''}})` : '';
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+  }}
+</script>
 </body>
 </html>"""
-
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    print("📰 MBA Newsletter Generator (Free RSS Edition)")
-    print(f"   Date: {datetime.now().strftime('%B %d, %Y')}")
+    print("📰 Chris's MBA Insider News Generator")
+    print(f"   Date:   {datetime.now().strftime('%B %d, %Y')}")
     print(f"   Topics: {len(TOPICS)}\n")
 
     results = []
@@ -314,22 +452,18 @@ def main():
     generated_at = datetime.now().strftime("%I:%M %p UTC, %B %d %Y")
     html = build_html(results, generated_at)
 
-    import os
     os.makedirs("newsletters", exist_ok=True)
+    dated = f"newsletters/mba-insider-{datetime.now().strftime('%Y-%m-%d')}.html"
+    latest = "newsletters/latest.html"
 
-    dated_file = f"newsletters/mba-insider-{datetime.now().strftime('%Y-%m-%d')}.html"
-    latest_file = "newsletters/latest.html"
-
-    with open(dated_file, "w", encoding="utf-8") as f:
-        f.write(html)
-    with open(latest_file, "w", encoding="utf-8") as f:
-        f.write(html)
+    for path in (dated, latest):
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(html)
 
     total = sum(len(r["articles"]) for r in results)
-    print(f"\n✅ Done! {total} articles saved.")
-    print(f"   Dated file : {dated_file}")
-    print(f"   Latest file: {latest_file}")
-
+    print(f"\n✅ Done! {total} articles across {len(TOPICS)} topics.")
+    print(f"   Dated : {dated}")
+    print(f"   Latest: {latest}")
 
 if __name__ == "__main__":
     main()
