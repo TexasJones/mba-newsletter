@@ -1,0 +1,90 @@
+"""Sends the weekly newsletter notification email."""
+import smtplib
+import os
+from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+gmail     = os.environ["GMAIL_ADDRESS"]
+app_pw    = os.environ["GMAIL_APP_PASSWORD"]
+recipient = os.environ.get("RECIPIENT_EMAIL") or gmail
+today     = datetime.now().strftime("%B %d, %Y")
+url       = "https://texasjones.github.io/mba-newsletter/newsletters/latest.html"
+
+print(f"📧 Sending from: {gmail}")
+print(f"📬 Sending to:   {recipient}")
+
+msg = MIMEMultipart("alternative")
+msg["Subject"] = f"Chris's MBA Insider News is ready - {today}"
+msg["From"]    = f"MBA Insider <{gmail}>"
+msg["To"]      = recipient
+
+text_body = f"""Chris's MBA Insider News - {today}
+
+Your weekly newsletter is ready!
+
+Read it here: {url}
+
+Topics covered this week:
+- MBA & Career Coaching
+- MBA & Career Advising
+- MBA & Artificial Intelligence
+- AI in Career Coaching & Advising
+- MBA for Working Professionals
+- MBA & Executive Education
+- MBA Return on Investment
+- MBA Online Programs
+- MBA & Networking
+
+Auto-generated every Monday via GitHub Actions.
+"""
+
+html_body = f"""<html><body style="font-family:Georgia,serif;background:#FAF7F4;padding:32px;">
+  <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:12px;
+              box-shadow:0 4px 20px rgba(191,87,0,0.1);overflow:hidden;">
+    <div style="background:linear-gradient(135deg,#8B3E00,#BF5700);padding:28px 32px;text-align:center;">
+      <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.2em;
+                  text-transform:uppercase;margin-bottom:8px;">Weekly Intelligence Brief</div>
+      <h1 style="margin:0;font-size:24px;color:#fff;font-weight:900;">Chris's MBA Insider News</h1>
+      <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-top:8px;">{today}</div>
+    </div>
+    <div style="padding:28px 32px;text-align:center;">
+      <p style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 24px;">
+        Your weekly newsletter covering MBA career coaching, career advising,
+        AI, executive education, networking, and more is ready.
+      </p>
+      <a href="{url}" style="display:inline-block;background:#BF5700;color:#fff;text-decoration:none;
+              font-size:15px;font-weight:700;padding:14px 32px;border-radius:8px;">
+        Read This Week's Newsletter
+      </a>
+      <p style="font-size:12px;color:#94a3b8;margin-top:20px;">
+        Or copy this link:<br/>
+        <a href="{url}" style="color:#BF5700;">{url}</a>
+      </p>
+    </div>
+    <div style="background:#FAF7F4;padding:16px 32px;text-align:center;border-top:1px solid #F4C6A0;">
+      <p style="font-size:11px;color:#94a3b8;margin:0;">
+        Auto-generated every Monday · Powered by Google News RSS · GitHub Actions
+      </p>
+    </div>
+  </div>
+</body></html>"""
+
+msg.attach(MIMEText(text_body, "plain"))
+msg.attach(MIMEText(html_body, "html"))
+
+try:
+    print("🔌 Connecting to smtp.gmail.com:465...")
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        print("🔐 Logging in...")
+        server.login(gmail, app_pw)
+        print("📤 Sending message...")
+        server.sendmail(gmail, recipient, msg.as_string())
+    print(f"✅ Email successfully sent to {recipient}")
+except smtplib.SMTPAuthenticationError as e:
+    print(f"❌ Authentication failed: {e}")
+    print("   Check GMAIL_ADDRESS and GMAIL_APP_PASSWORD secrets are correct.")
+    raise
+except Exception as e:
+    print(f"❌ Failed to send email: {e}")
+    raise
