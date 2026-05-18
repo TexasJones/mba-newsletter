@@ -10,7 +10,7 @@ import urllib.request
 import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from html import escape
+from html import escape, unescape
 
 # ── RSS Feed Sources per Topic ────────────────────────────────────────────────
 # Google News RSS supports any search query — completely free, no key needed.
@@ -81,8 +81,10 @@ TOPICS = [
 # ── RSS Fetching ──────────────────────────────────────────────────────────────
 
 def clean_html(raw: str) -> str:
-    """Strip HTML tags from a string."""
-    return re.sub(r"<[^>]+>", "", raw or "").strip()
+    """Strip HTML tags and decode HTML entities."""
+    text = re.sub(r"<[^>]+>", "", raw or "")
+    text = unescape(text)  # fix &amp; &#39; &quot; etc
+    return text.strip()
 
 
 def fetch_feed(url: str, max_items: int = 5) -> list[dict]:
