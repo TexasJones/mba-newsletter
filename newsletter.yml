@@ -1,17 +1,13 @@
 name: Generate MBA Newsletter
 
 on:
-  # Run every Monday at 8:00 AM Central (14:00 UTC)
   schedule:
     - cron: "0 14 * * 1"
-
-  # Run manually anytime from the Actions tab
   workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
 
@@ -31,11 +27,11 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
+          git fetch origin main
+          git reset --soft origin/main
           git add newsletters/
           git diff --cached --quiet || git commit -m "📰 Weekly MBA newsletter $(date +'%Y-%m-%d')"
-          git push
-
+          git push origin main
 
       - name: Send email notification
         env:
