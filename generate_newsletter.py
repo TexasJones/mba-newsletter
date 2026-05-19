@@ -465,5 +465,75 @@ def main():
     print(f"   Dated : {dated}")
     print(f"   Latest: {latest}")
 
+def send_email(dated_file: str):
+    """Send email notification — only runs if Gmail secrets are set."""
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    gmail    = os.environ.get("GMAIL_ADDRESS", "")
+    app_pw   = os.environ.get("GMAIL_APP_PASSWORD", "")
+    recipient = os.environ.get("RECIPIENT_EMAIL") or gmail
+
+    if not gmail or not app_pw:
+        print("\n⚠ Email skipped — GMAIL_ADDRESS or GMAIL_APP_PASSWORD not set.")
+        return
+
+    today = datetime.now().strftime("%B %d, %Y")
+    url   = "https://texasjones.github.io/mba-newsletter/newsletters/latest.html"
+
+    print(f"\n📧 Sending from: {gmail}")
+    print(f"📬 Sending to:   {recipient}")
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = f"Chris\'s MBA Insider News is ready - {today}"
+    msg["From"]    = f"MBA Insider <{gmail}>"
+    msg["To"]      = recipient
+
+    text_body = f"""Chris\'s MBA Insider News - {today}
+Your weekly newsletter is ready!
+Read it here: {url}
+Auto-generated every Monday via GitHub Actions."""
+
+    html_body = f"""<html><body style="font-family:Georgia,serif;background:#FAF7F4;padding:32px;">
+  <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;">
+    <div style="background:linear-gradient(135deg,#8B3E00,#BF5700);padding:28px 32px;text-align:center;">
+      <h1 style="margin:0;font-size:24px;color:#fff;font-weight:900;">Chris\'s MBA Insider News</h1>
+      <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-top:8px;">{today}</div>
+    </div>
+    <div style="padding:28px 32px;text-align:center;">
+      <p style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 24px;">
+        Your weekly MBA newsletter is ready with the latest articles on career coaching,
+        advising, AI, executive education, networking, and more.
+      </p>
+      <a href="{url}" style="display:inline-block;background:#BF5700;color:#fff;
+              text-decoration:none;font-size:15px;font-weight:700;padding:14px 32px;border-radius:8px;">
+        Read This Week\'s Newsletter
+      </a>
+      <p style="font-size:12px;color:#94a3b8;margin-top:20px;">
+        Direct link: <a href="{url}" style="color:#BF5700;">{url}</a>
+      </p>
+    </div>
+  </div>
+</body></html>"""
+
+    msg.attach(MIMEText(text_body, "plain"))
+    msg.attach(MIMEText(html_body, "html"))
+
+    try:
+        print("🔌 Connecting to smtp.gmail.com:465...")
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            print("🔐 Logging in...")
+            server.login(gmail, app_pw)
+            print("📤 Sending...")
+            server.sendmail(gmail, recipient, msg.as_string())
+        print(f"✅ Email sent to {recipient}")
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"❌ Auth failed: {e}")
+        print("   Verify 2-Step Verification is ON and App Password is correct.")
+    except Exception as e:
+        print(f"❌ Email error: {e}")
+
+
 if __name__ == "__main__":
     main()
