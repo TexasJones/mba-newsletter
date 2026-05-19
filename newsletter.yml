@@ -20,7 +20,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate newsletter
+      - name: Generate newsletter and send email
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
         run: python generate_newsletter.py
 
       - name: Commit and push newsletter
@@ -32,10 +36,3 @@ jobs:
           git add newsletters/
           git diff --cached --quiet || git commit -m "📰 Weekly MBA newsletter $(date +'%Y-%m-%d')"
           git push origin main
-
-      - name: Send email notification
-        env:
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
-        run: python send_email.py
