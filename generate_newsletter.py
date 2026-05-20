@@ -130,6 +130,18 @@ TOPICS = [
             "https://news.google.com/rss/search?q=business+school+alumni+networking&hl=en-US&gl=US&ceid=US:en",
         ],
     },
+    {
+        "id": "mccombs",
+        "label": "McCombs MBA",
+        "color": "#BF5700",
+        "bg": "#FDF0E8",
+        "border": "#F4C6A0",
+        "icon": "🤘",
+        "feeds": [
+            "https://news.google.com/rss/search?q=McCombs+MBA&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=McCombs+School+of+Business+UT+Austin&hl=en-US&gl=US&ceid=US:en",
+        ],
+    },
 ]
 
 # ── RSS Fetching ──────────────────────────────────────────────────────────────
