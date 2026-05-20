@@ -165,11 +165,13 @@ def fetch_feed(url: str, max_items: int = 5) -> list:
         pub_date = get("pubDate") or get("published") or get("updated")
 
         formatted_date = ""
+        sort_dt = None
         for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S %Z",
                     "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S%z"):
             try:
                 dt = datetime.strptime(pub_date.strip(), fmt)
                 formatted_date = dt.strftime("%b %d, %Y")
+                sort_dt = dt
                 break
             except ValueError:
                 continue
@@ -187,7 +189,8 @@ def fetch_feed(url: str, max_items: int = 5) -> list:
 
         articles.append({
             "title": title, "url": link,
-            "description": description, "source": source, "date": formatted_date,
+            "description": description, "source": source,
+            "date": formatted_date, "sort_dt": sort_dt,
         })
     return articles
 
@@ -202,6 +205,8 @@ def fetch_topic(topic: dict, max_per_feed: int = 4) -> list:
                 results.append(article)
         if len(results) >= 6:
             break
+    # Sort by date, newest first (articles without a date go to the end)
+    results.sort(key=lambda a: a["sort_dt"] if a["sort_dt"] else datetime.min.replace(tzinfo=None), reverse=True)
     print(f"    → {len(results)} articles found")
     return results[:6]
 
