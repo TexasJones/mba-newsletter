@@ -2,7 +2,7 @@ name: Generate MBA Newsletter
 
 on:
   schedule:
-    - cron: "0 14 * * 1"
+    - cron: "0 14 * * *"
   workflow_dispatch:
 
 jobs:
@@ -34,5 +34,5 @@ jobs:
           git fetch origin main
           git reset --soft origin/main
           git add newsletters/
-          git diff --cached --quiet || git commit -m "📰 Weekly MBA newsletter $(date +'%Y-%m-%d')"
+          git diff --cached --quiet || git commit -m "📰 Daily MBA newsletter $(date +'%Y-%m-%d')"
           git push origin main
