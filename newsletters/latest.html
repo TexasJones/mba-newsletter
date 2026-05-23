@@ -9,160 +9,235 @@
     body{margin:0;padding:0;background:#FAF7F4;font-family:Georgia,'Times New Roman',serif;}
     a{cursor:pointer;}
     #search-box{width:100%;padding:12px 18px 12px 44px;font-size:14px;border:2px solid #e8e0d8;
-      border-radius:8px;font-family:Georgia,serif;outline:none;background:#fff;
-      transition:border-color 0.2s;}
+      border-radius:8px;font-family:Georgia,serif;outline:none;background:#fff;transition:border-color 0.2s;}
     #search-box:focus{border-color:#BF5700;}
     .search-wrap{position:relative;margin-bottom:24px;}
     .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none;}
-    .no-results{display:none;text-align:center;color:#94a3b8;padding:32px;font-size:14px;}
     @media(max-width:600px){.main{padding:20px !important;} h1{font-size:26px !important;}}
   </style>
 </head>
 <body>
 <div id="top" style="max-width:760px;margin:32px auto;padding:0 16px 60px;">
 
-  <!-- ── Masthead ── -->
+  <!-- Masthead -->
   <div style="background:linear-gradient(135deg,#8B3E00 0%,#BF5700 60%,#D4621A 100%);
        border-radius:16px 16px 0 0;padding:40px 36px 32px;text-align:center;position:relative;overflow:hidden;">
-    <!-- decorative circles -->
-    <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;
-         border-radius:50%;background:rgba(255,255,255,0.05);"></div>
-    <div style="position:absolute;bottom:-60px;left:-30px;width:220px;height:220px;
-         border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+    <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+    <div style="position:absolute;bottom:-60px;left:-30px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.04);"></div>
     <div style="position:relative;">
-      <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.5);
-           letter-spacing:0.25em;text-transform:uppercase;margin-bottom:14px;">
-        Weekly Intelligence Brief
+      <div style="font-size:10px;font-family:monospace;color:rgba(255,255,255,0.5);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:14px;">
+        Daily Intelligence Brief
       </div>
-      <h1 style="margin:0 0 6px;font-size:38px;font-weight:900;color:#fff;
-           letter-spacing:-0.02em;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,0.2);">
+      <h1 style="margin:0 0 6px;font-size:38px;font-weight:900;color:#fff;letter-spacing:-0.02em;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,0.2);">
         Chris's MBA Insider News
       </h1>
       <div style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:22px;letter-spacing:0.05em;">
-        Career Coaching · Career Advising · AI · Executive Ed · Networking
+        McCombs · Career Coaching · Advising · AI · Executive Ed · Networking
       </div>
       <div style="display:inline-flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;">
-        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
-             border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
+        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
           📅 May 23, 2026
         </div>
-        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);
-             border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
+        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
           📰 60 articles · 10 topics
+        </div>
+        <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:7px 18px;font-size:12px;color:#fff;font-family:monospace;">
+          🕐 03:23 PM UTC
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── Body ── -->
-  <div class="main" style="background:#fff;border-radius:0 0 16px 16px;
-       box-shadow:0 8px 40px rgba(191,87,0,0.1);padding:36px;">
+  <!-- Body -->
+  <div class="main" style="background:#fff;border-radius:0 0 16px 16px;box-shadow:0 8px 40px rgba(191,87,0,0.1);padding:36px;">
 
-    <!-- Search bar -->
+    <!-- Search -->
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input id="search-box" type="text" placeholder="Search all articles by keyword, source, or topic…"
-             oninput="filterArticles(this.value)"/>
+      <input id="search-box" type="text" placeholder="Search all articles by keyword, source, or topic…" oninput="filterArticles(this.value)"/>
     </div>
 
-    <!-- Table of Contents -->
+    <!-- TOC -->
     <div id="toc-section">
-      <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;
-           letter-spacing:0.1em;margin-bottom:10px;">Jump to section</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;"><a href="#coaching" style="display:inline-flex;align-items:center;gap:6px;background:#FDF0E8;border:1px solid #F4C6A0;color:#BF5700;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🎓 MBA &amp; Career Coaching <span style="background:#BF5700;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#advising" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🧭 MBA &amp; Career Advising <span style="background:#0f766e;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#ai" style="display:inline-flex;align-items:center;gap:6px;background:#f5f3ff;border:1px solid #ddd6fe;color:#7c3aed;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🤖 MBA &amp; Artificial Intelligence <span style="background:#7c3aed;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#aicoaching" style="display:inline-flex;align-items:center;gap:6px;background:#fffbeb;border:1px solid #fde68a;color:#b45309;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">⚡ AI in Career Coaching &amp; Advising <span style="background:#b45309;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#workingpro" style="display:inline-flex;align-items:center;gap:6px;background:#fdf2f8;border:1px solid #fbcfe8;color:#be185d;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">💼 MBA for Working Professionals <span style="background:#be185d;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#execed" style="display:inline-flex;align-items:center;gap:6px;background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🏛️ MBA &amp; Executive Education <span style="background:#0369a1;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#roi" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">📈 MBA Return on Investment <span style="background:#15803d;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#online" style="display:inline-flex;align-items:center;gap:6px;background:#ecfeff;border:1px solid #a5f3fc;color:#0891b2;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">💻 MBA Online Programs <span style="background:#0891b2;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#networking" style="display:inline-flex;align-items:center;gap:6px;background:#f5f3ff;border:1px solid #c4b5fd;color:#6d28d9;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🤝 MBA &amp; Networking <span style="background:#6d28d9;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#mccombs" style="display:inline-flex;align-items:center;gap:6px;background:#FDF0E8;border:1px solid #F4C6A0;color:#BF5700;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🤘 McCombs MBA <span style="background:#BF5700;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a></div>
+      <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Jump to section</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;"><a href="#mccombs" style="display:inline-flex;align-items:center;gap:6px;background:#FDF0E8;border:1px solid #F4C6A0;color:#BF5700;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🤘 McCombs MBA <span style="background:#BF5700;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#coaching" style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🎓 MBA &amp; Career Coaching <span style="background:#1d4ed8;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#advising" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🧭 MBA &amp; Career Advising <span style="background:#0f766e;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#ai" style="display:inline-flex;align-items:center;gap:6px;background:#f5f3ff;border:1px solid #ddd6fe;color:#7c3aed;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🤖 MBA &amp; Artificial Intelligence <span style="background:#7c3aed;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#aicoaching" style="display:inline-flex;align-items:center;gap:6px;background:#fffbeb;border:1px solid #fde68a;color:#b45309;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">⚡ AI in Career Coaching &amp; Advising <span style="background:#b45309;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#workingpro" style="display:inline-flex;align-items:center;gap:6px;background:#fdf2f8;border:1px solid #fbcfe8;color:#be185d;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">💼 MBA for Working Professionals <span style="background:#be185d;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#execed" style="display:inline-flex;align-items:center;gap:6px;background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🏛️ MBA &amp; Executive Education <span style="background:#0369a1;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#roi" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">📈 MBA Return on Investment <span style="background:#15803d;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#online" style="display:inline-flex;align-items:center;gap:6px;background:#ecfeff;border:1px solid #a5f3fc;color:#0891b2;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">💻 MBA Online Programs <span style="background:#0891b2;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a><a href="#networking" style="display:inline-flex;align-items:center;gap:6px;background:#f5f3ff;border:1px solid #c4b5fd;color:#6d28d9;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap;">🤝 MBA &amp; Networking <span style="background:#6d28d9;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;">6</span></a></div>
     </div>
 
     <div style="border-top:2px solid #F8EDE3;margin-bottom:36px;"></div>
 
-    <!-- Search results view (hidden by default) -->
+    <!-- Search results (hidden by default) -->
     <div id="search-results" style="display:none;">
       <div style="font-size:13px;color:#64748b;margin-bottom:16px;">
-        Showing results for: <strong id="search-term" style="color:#BF5700;"></strong>
+        Results for: <strong id="search-term" style="color:#BF5700;"></strong>
         <span id="result-count" style="color:#94a3b8;margin-left:8px;"></span>
       </div>
-      <div id="search-cards"><div class="article-card" data-topic="coaching" data-text="anxious parents are spending more than $50,000 to land their kid a job bloomberg.com anxious parents are spending more than $50,000 to land their kid a job  bloomberg.com"
+      <div id="search-cards"><div class="article-card" data-topic="mccombs" data-text="nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin the university of texas at austin nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin  the university of texas at austin"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDRPd3VyVlIzTi1QSHNFLVQtcU1JWmNORnlxNVAyd2tab2JSZkFsZl9qUlo2ajhJNWZid0JHWG1wOHFoeS1oSF9EdFlydDZLNG9iNzN4T0thdlVQMWNSbVE5M1ZlZzRRU0lTYlY0Y195RkxCMC1OMjhTV1RPVTFtZUZUUlVjcjNaWFhNSmpXeDJGdjhIYUNWQXdPdEU5TkQ3UkoyaE5meDNUTG40UVVKMkJlN3Y3X28?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#BF5700;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">NEXXUS Strengthens Cross-Disciplinary Healthcare Entrepreneur Preparation at UT Austin</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">NEXXUS Strengthens Cross-Disciplinary Healthcare Entrepreneur Preparation at UT Austin  The University of Texas at Austin</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">The University of Texas at Austin</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDRPd3VyVlIzTi1QSHNFLVQtcU1JWmNORnlxNVAyd2tab2JSZkFsZl9qUlo2ajhJNWZid0JHWG1wOHFoeS1oSF9EdFlydDZLNG9iNzN4T0thdlVQMWNSbVE5M1ZlZzRRU0lTYlY0Y195RkxCMC1OMjhTV1RPVTFtZUZUUlVjcjNaWFhNSmpXeDJGdjhIYUNWQXdPdEU5TkQ3UkoyaE5meDNUTG40UVVKMkJlN3Y3X28?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
+<div class="article-card" data-topic="mccombs" data-text="ut names new dean to lead mccombs school of business austin american-statesman ut names new dean to lead mccombs school of business  austin american-statesman"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQY1RWanNRZmZhU2N1RTNVc3RMRTNUcGI0R01CSkNzZnF3eDhON2NGcEtuMlNzYko5UnhCalBUNTY2ZWI0Vy1oOUVvcFlxOVRrNXpxbV9hczZFb1huTjcyaDJrS0JMbktiUld0WWRIcWphZHgxVVUya0MyYW9pQnhsOEtUdnIxOGZDbXFGcmpJNXhaRDFzelBSUHVwX0tRaW43cEZlZlBnMGU5Y01CSEc1ZjZR?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#BF5700;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">UT names new dean to lead McCombs School of Business</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">UT names new dean to lead McCombs School of Business  Austin American-Statesman</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Austin American-Statesman</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 01, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQY1RWanNRZmZhU2N1RTNVc3RMRTNUcGI0R01CSkNzZnF3eDhON2NGcEtuMlNzYko5UnhCalBUNTY2ZWI0Vy1oOUVvcFlxOVRrNXpxbV9hczZFb1huTjcyaDJrS0JMbktiUld0WWRIcWphZHgxVVUya0MyYW9pQnhsOEtUdnIxOGZDbXFGcmpJNXhaRDFzelBSUHVwX0tRaW43cEZlZlBnMGU5Y01CSEc1ZjZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
+<div class="article-card" data-topic="mccombs" data-text="bradley staats appointed dean of mccombs school of business ut austin news bradley staats appointed dean of mccombs school of business  ut austin news"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPZlBGOTg2NUlTTE04NmxyUnFoY2ViS1ZzTWg0T3FoeGdPc2JqT1A3OFJqaG5yUzJkeWpoUDZ3ZWRod3R4UXd1cVRhRW9YNnFMWGVrdHdfd1VheWdrX21qZHhOV2NjOXBNZkhHMEh2MFB0Zk5Ga21kcUo0YndyOGxNUWxxeWkzRXBiS3NLbEprcjhQTzhtOE1jMkt5VQ?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#BF5700;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">Bradley Staats Appointed Dean of McCombs School of Business</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Bradley Staats Appointed Dean of McCombs School of Business  UT Austin News</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">UT Austin News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 30, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPZlBGOTg2NUlTTE04NmxyUnFoY2ViS1ZzTWg0T3FoeGdPc2JqT1A3OFJqaG5yUzJkeWpoUDZ3ZWRod3R4UXd1cVRhRW9YNnFMWGVrdHdfd1VheWdrX21qZHhOV2NjOXBNZkhHMEh2MFB0Zk5Ga21kcUo0YndyOGxNUWxxeWkzRXBiS3NLbEprcjhQTzhtOE1jMkt5VQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
+<div class="article-card" data-topic="mccombs" data-text="texas mccombs expands md-mba pipeline to houston with new dual degree poets&amp;quants texas mccombs expands md-mba pipeline to houston with new dual degree  poets&amp;quants"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNekFXLUw1Mi12c0tWM01SS1Zmdl9Nb1Z3Mm9UVzdlNFh5elhUZUt2eU5JS2VmWWFSSGliNUNRb3hwclpxMGFXbTB3WERVazZvdXVuVjkzQ0lDM1hJZG5QU0I4Znc0NW02RXhmNTdWek5KTlA0cndtT3FmX2Y4aFpyUTBUcWlWZzE3UEtVcml0eEhWdmExUzdHMkE5SWlCUVNXZ1RoOGxrLWdJRFJ1?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#BF5700;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">Texas McCombs Expands MD-MBA Pipeline To Houston With New Dual Degree</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Texas McCombs Expands MD-MBA Pipeline To Houston With New Dual Degree  Poets&amp;Quants</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 27, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNekFXLUw1Mi12c0tWM01SS1Zmdl9Nb1Z3Mm9UVzdlNFh5elhUZUt2eU5JS2VmWWFSSGliNUNRb3hwclpxMGFXbTB3WERVazZvdXVuVjkzQ0lDM1hJZG5QU0I4Znc0NW02RXhmNTdWek5KTlA0cndtT3FmX2Y4aFpyUTBUcWlWZzE3UEtVcml0eEhWdmExUzdHMkE5SWlCUVNXZ1RoOGxrLWdJRFJ1?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
+<div class="article-card" data-topic="mccombs" data-text="ut business school opening at city centre realty news report ut business school opening at city centre  realty news report"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE5IUXRUVVhtYm5xR0F1TmhfZFRZVEw0bTNXcGZXZlNwY2RjODdQdjhhOGN0MXQzSTVmYVZvUjVwSU1JU1UxNDZ6dXFxU19aWjVEY1J0TjVlam1IbWNRWDZ4eGw5US1vUjJVV0czNmV1R1RGLVFiS2syOWxmbw?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#BF5700;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">UT Business School Opening at City Centre</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">UT Business School Opening at City Centre  Realty News Report</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Realty News Report</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Jan 14, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE5IUXRUVVhtYm5xR0F1TmhfZFRZVEw0bTNXcGZXZlNwY2RjODdQdjhhOGN0MXQzSTVmYVZvUjVwSU1JU1UxNDZ6dXFxU19aWjVEY1J0TjVlam1IbWNRWDZ4eGw5US1vUjJVV0czNmV1R1RGLVFiS2syOWxmbw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
+<div class="article-card" data-topic="mccombs" data-text="what are the best business schools in texas? graduate management admission council what are the best business schools in texas?  graduate management admission council"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNTUJNa3o3TDRGVEZfUm9Za3UtdllycGgwSlRkYXVkQ1gycXJOTlZiZHpYSHV1NE1qQlBLRXZiSHladnFPaXdZZVN2NWFWaDR3N3RZUUcwUjFjandRTUFpM1o5WWpQWXF2blFSc2F5TmdfZG43VTRTc0kycXlXSE43Q1Z4MEVvQzJpcm1Ib0NfcUV0M1hybFJNMGhn?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#BF5700;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">What are the best business schools in Texas?</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">What are the best business schools in Texas?  Graduate Management Admission Council</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Jan 09, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNTUJNa3o3TDRGVEZfUm9Za3UtdllycGgwSlRkYXVkQ1gycXJOTlZiZHpYSHV1NE1qQlBLRXZiSHladnFPaXdZZVN2NWFWaDR3N3RZUUcwUjFjandRTUFpM1o5WWpQWXF2blFSc2F5TmdfZG43VTRTc0kycXlXSE43Q1Z4MEVvQzJpcm1Ib0NfcUV0M1hybFJNMGhn?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
+<div class="article-card" data-topic="coaching" data-text="anxious parents are spending more than $50,000 to land their kid a job bloomberg.com anxious parents are spending more than $50,000 to land their kid a job  bloomberg.com"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQnpjNXR6RDQ4dkUyRUpxVTU4aE5Dbk9CZTlqUElhbWV4MHZPN2loUjU1dXViX1MwYjRQOHR6R004SlJMOVBLR2ZSNGt5Mko1M3ZUcVk4TjhnMXN5TDlDclV1NzlGaW04VHQ5YWNuSnZJemxxUWtKQzFwb3hKd0QtMUJCNV9OczRzVDZYLXZaeWlTb1lnc3doSmJZR2dtWExFX29RUTNCUlBlWWxYWlo5TVBsNjhORE1JWE9DMDJkSlF5NDQ?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">Anxious Parents Are Spending More Than $50,000 to Land Their Kid a Job</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Anxious Parents Are Spending More Than $50,000 to Land Their Kid a Job  Bloomberg.com</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Bloomberg.com</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQnpjNXR6RDQ4dkUyRUpxVTU4aE5Dbk9CZTlqUElhbWV4MHZPN2loUjU1dXViX1MwYjRQOHR6R004SlJMOVBLR2ZSNGt5Mko1M3ZUcVk4TjhnMXN5TDlDclV1NzlGaW04VHQ5YWNuSnZJemxxUWtKQzFwb3hKd0QtMUJCNV9OczRzVDZYLXZaeWlTb1lnc3doSmJZR2dtWExFX29RUTNCUlBlWWxYWlo5TVBsNjhORE1JWE9DMDJkSlF5NDQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Bloomberg.com</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQnpjNXR6RDQ4dkUyRUpxVTU4aE5Dbk9CZTlqUElhbWV4MHZPN2loUjU1dXViX1MwYjRQOHR6R004SlJMOVBLR2ZSNGt5Mko1M3ZUcVk4TjhnMXN5TDlDclV1NzlGaW04VHQ5YWNuSnZJemxxUWtKQzFwb3hKd0QtMUJCNV9OczRzVDZYLXZaeWlTb1lnc3doSmJZR2dtWExFX29RUTNCUlBlWWxYWlo5TVBsNjhORE1JWE9DMDJkSlF5NDQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="coaching" data-text="mba career pivots are happening earlier than ever find mba mba career pivots are happening earlier than ever  find mba"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOcjZXRTlQQ1RRNkN1MkZ3UEx4ZG10UUZrMC1mRkpXenhpT2dlWE1pQkpOeTFXQUc2dlRkN2EzdHNlbVFPZHNpaTV3TUpPVTRWUjRra2JRcW1RVHN1X0pVenRxdnppRF95Mm1RLUg2aURQM2N5eTZtTDR6anc4dXo5LVkxSmVnQQ?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">MBA Career Pivots are Happening Earlier Than Ever</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">MBA Career Pivots are Happening Earlier Than Ever  FIND MBA</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">FIND MBA</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Mar 17, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOcjZXRTlQQ1RRNkN1MkZ3UEx4ZG10UUZrMC1mRkpXenhpT2dlWE1pQkpOeTFXQUc2dlRkN2EzdHNlbVFPZHNpaTV3TUpPVTRWUjRra2JRcW1RVHN1X0pVenRxdnppRF95Mm1RLUg2aURQM2N5eTZtTDR6anc4dXo5LVkxSmVnQQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">FIND MBA</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Mar 17, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOcjZXRTlQQ1RRNkN1MkZ3UEx4ZG10UUZrMC1mRkpXenhpT2dlWE1pQkpOeTFXQUc2dlRkN2EzdHNlbVFPZHNpaTV3TUpPVTRWUjRra2JRcW1RVHN1X0pVenRxdnppRF95Mm1RLUg2aURQM2N5eTZtTDR6anc4dXo5LVkxSmVnQQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="coaching" data-text="how one premier european b-school’s careers team coaches students to get hired poets&amp;quants how one premier european b-school’s careers team coaches students to get hired  poets&amp;quants"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQdk9icFdGSXE3ZVRBTEdFZ0oyRWlyRWlKZDY3cWpFWTRLSklGaUUtR2VZQTJuTmIxTkxoV1ptS3d5VUdSM3ZtbUNlczFEVzQ5ZGx5em00cWpRcjdMSy1FRWpDenp4Tmk5a0FLcjVoNWpveWYyN2Nab2FLQ3hUZHZmUlo2ODZoRzVERElPbDlpcTZtOGc4OWExbTBLNU5uR1NycTYzdUdDR2JjX3NMMFRoODNVVE5lbU0?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">How One Premier European B-School’s Careers Team Coaches Students To Get Hired</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">How One Premier European B-School’s Careers Team Coaches Students To Get Hired  Poets&amp;Quants</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQdk9icFdGSXE3ZVRBTEdFZ0oyRWlyRWlKZDY3cWpFWTRLSklGaUUtR2VZQTJuTmIxTkxoV1ptS3d5VUdSM3ZtbUNlczFEVzQ5ZGx5em00cWpRcjdMSy1FRWpDenp4Tmk5a0FLcjVoNWpveWYyN2Nab2FLQ3hUZHZmUlo2ODZoRzVERElPbDlpcTZtOGc4OWExbTBLNU5uR1NycTYzdUdDR2JjX3NMMFRoODNVVE5lbU0?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQdk9icFdGSXE3ZVRBTEdFZ0oyRWlyRWlKZDY3cWpFWTRLSklGaUUtR2VZQTJuTmIxTkxoV1ptS3d5VUdSM3ZtbUNlczFEVzQ5ZGx5em00cWpRcjdMSy1FRWpDenp4Tmk5a0FLcjVoNWpveWYyN2Nab2FLQ3hUZHZmUlo2ODZoRzVERElPbDlpcTZtOGc4OWExbTBLNU5uR1NycTYzdUdDR2JjX3NMMFRoODNVVE5lbU0?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="coaching" data-text="the notre dame mba helped put lauren suga on the path to her dream job mendoza college of business the notre dame mba helped put lauren suga on the path to her dream job  mendoza college of business"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5wUGVkaVAyaVVsQmNORkZ0TEpKSG9zYURSZkJOOHBoaC05YVhJQmxGR0VYT3A5YllhVTI3Tm1ZZ184dXYxb2pHNEI1b21XT2JmbjM2X2pUdS1kM3llY0ZR?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">The Notre Dame MBA helped put Lauren Suga on the path to her dream job</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">The Notre Dame MBA helped put Lauren Suga on the path to her dream job  Mendoza College of Business</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Mendoza College of Business</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5wUGVkaVAyaVVsQmNORkZ0TEpKSG9zYURSZkJOOHBoaC05YVhJQmxGR0VYT3A5YllhVTI3Tm1ZZ184dXYxb2pHNEI1b21XT2JmbjM2X2pUdS1kM3llY0ZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Mendoza College of Business</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5wUGVkaVAyaVVsQmNORkZ0TEpKSG9zYURSZkJOOHBoaC05YVhJQmxGR0VYT3A5YllhVTI3Tm1ZZ184dXYxb2pHNEI1b21XT2JmbjM2X2pUdS1kM3llY0ZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="coaching" data-text="jumpstart your future at the toppel career center university of miami news jumpstart your future at the toppel career center  university of miami news"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQSjJ3M1hNOFl3SVFMR2RUTkdPRWlSTElhY0ZvdkpaYnBPbDdLd2xDQkt2SWpSYzlDSzRCRkV6SUVlSFlvTjVHT3Vxem9vSnAyXzI2YjJRTmdwblNjc0FUR0VhcFk1UTVMeUpjTkhLMkNzVFctMEJ3TXBPRVphMi04aW54eVZBQTFveWhKSkhwZDBtUjNPYktXTg?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">Jumpstart your future at the Toppel Career Center</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Jumpstart your future at the Toppel Career Center  University of Miami News</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">University of Miami News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 14, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQSjJ3M1hNOFl3SVFMR2RUTkdPRWlSTElhY0ZvdkpaYnBPbDdLd2xDQkt2SWpSYzlDSzRCRkV6SUVlSFlvTjVHT3Vxem9vSnAyXzI2YjJRTmdwblNjc0FUR0VhcFk1UTVMeUpjTkhLMkNzVFctMEJ3TXBPRVphMi04aW54eVZBQTFveWhKSkhwZDBtUjNPYktXTg?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">University of Miami News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 14, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQSjJ3M1hNOFl3SVFMR2RUTkdPRWlSTElhY0ZvdkpaYnBPbDdLd2xDQkt2SWpSYzlDSzRCRkV6SUVlSFlvTjVHT3Vxem9vSnAyXzI2YjJRTmdwblNjc0FUR0VhcFk1UTVMeUpjTkhLMkNzVFctMEJ3TXBPRVphMi04aW54eVZBQTFveWhKSkhwZDBtUjNPYktXTg?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="coaching" data-text="6 reasons why business school is a great choice for veterans graduate management admission council 6 reasons why business school is a great choice for veterans  graduate management admission council"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNY3JFa0l0aDN6WnpMQmtjMno3cEdfS0J3a2dKbmc3empIdHVMTjhOWUZObGJxMUJSSncycE9tYk1yN2l2RE0tSlRLbFV3Vi1KM2VWX2wyRWNRVnNnVE8tLTdFRHczNVNYMFJ6SEk5OHQtNkZGME1hNTNncXBPWU41UjU0UjExM2pKcG5ITF94ZHBfdEJ6VFdpTS0tZUtuU19BV2M3c0NEWXZId25HLUE?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">6 Reasons Why Business School Is A Great Choice For Veterans</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">6 Reasons Why Business School Is A Great Choice For Veterans  Graduate Management Admission Council</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 11, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNY3JFa0l0aDN6WnpMQmtjMno3cEdfS0J3a2dKbmc3empIdHVMTjhOWUZObGJxMUJSSncycE9tYk1yN2l2RE0tSlRLbFV3Vi1KM2VWX2wyRWNRVnNnVE8tLTdFRHczNVNYMFJ6SEk5OHQtNkZGME1hNTNncXBPWU41UjU0UjExM2pKcG5ITF94ZHBfdEJ6VFdpTS0tZUtuU19BV2M3c0NEWXZId25HLUE?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 11, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNY3JFa0l0aDN6WnpMQmtjMno3cEdfS0J3a2dKbmc3empIdHVMTjhOWUZObGJxMUJSSncycE9tYk1yN2l2RE0tSlRLbFV3Vi1KM2VWX2wyRWNRVnNnVE8tLTdFRHczNVNYMFJ6SEk5OHQtNkZGME1hNTNncXBPWU41UjU0UjExM2pKcG5ITF94ZHBfdEJ6VFdpTS0tZUtuU19BV2M3c0NEWXZId25HLUE?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="advising" data-text="visit career services this summer carleton university visit career services this summer  carleton university"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0f766e;border-radius:8px;
@@ -430,20 +505,6 @@
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">How to Choose an Accredited Fully Online MBA: A Practical Guide for Working Professionals  Nexford University</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Nexford University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 06, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaDhuZ3ljU3V4a3NuYVRULVE5ZFl5eFlQcEdFN2NIaGRtOVNIRjc2bzhlRGY3OHY2blFOQ0YtVWItb3BROGpwdk5MZzVXd1BiM1RTbDJqd29zaDZmTXhkZzVWbXVpNXUycWxqajQ4TEFBUHJEMFptT0N2bDBPalk2cElRb9IBkwFBVV95cUxPWEoydWs0YXlTODUxUGtJTDdCN3B3YV9Tb3c0SmY1NEFuNkw2MUY2V0dKWHBhNEo5cUZpamd5WmlMMEdPZ2tmM0JGMk9oNkNKM3MxanBjemxlZXNXNlRjMWVMam54ejhHOVRsNV83bjQ2eWs4RWJxLUhGTWhLY2xDUktFY010UC15d2ZmdUdyQTdPdnc?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
-<div class="article-card" data-topic="workingpro" data-text="best online mba programs in florida: 2026 comparison nexford university best online mba programs in florida: 2026 comparison  nexford university"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #be185d;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTFByR0xUVy16MVJ1UDU2UzBmX25PV0MtS0tMenBfOEhSZ1BLYVQ4dzNZb3FFdGVEQUc0OXN3X041RFdhdmplaVZVQXN1WnZCUk5WLXZSSWpBd3NVTXhCdXBJUHRIbjFsS0FDcWdPV2lEMGo5VDhRR1N30gGHAUFVX3lxTE4zc2YxWkJGMW43LU9JN1FENEE2MEw1cWZXb1hVNm95Y0pGYktpOWFmNzNuU2Npd3Z4TGhyOE1QdTFMWHVmM2tOQ0hiT2lvQWt6d0EwM3pxZmtyc1hDZDY5aER2ZFNoXzNxVEtCZHdEVFFOYnB1SnlqaE85RFdNRVoxZUZYcTBGdw?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#be185d;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Best Online MBA Programs in Florida: 2026 Comparison</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Best Online MBA Programs in Florida: 2026 Comparison  Nexford University</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Nexford University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 24, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTFByR0xUVy16MVJ1UDU2UzBmX25PV0MtS0tMenBfOEhSZ1BLYVQ4dzNZb3FFdGVEQUc0OXN3X041RFdhdmplaVZVQXN1WnZCUk5WLXZSSWpBd3NVTXhCdXBJUHRIbjFsS0FDcWdPV2lEMGo5VDhRR1N30gGHAUFVX3lxTE4zc2YxWkJGMW43LU9JN1FENEE2MEw1cWZXb1hVNm95Y0pGYktpOWFmNzNuU2Npd3Z4TGhyOE1QdTFMWHVmM2tOQ0hiT2lvQWt6d0EwM3pxZmtyc1hDZDY5aER2ZFNoXzNxVEtCZHdEVFFOYnB1SnlqaE85RFdNRVoxZUZYcTBGdw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
 <div class="article-card" data-topic="workingpro" data-text="the ultimate guide to choosing a part-time mba at imperial imperial college london the ultimate guide to choosing a part-time mba at imperial  imperial college london"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #be185d;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -500,6 +561,20 @@
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">A Marathon, Not a Sprint: Thriving Through a Three-Year Part-Time MBA  Darden Report Online</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Darden Report Online</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 26, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOdU1DUFVMUDg0M2xfcDFaUHAwbWJwVDUtTWplbjRoTWdrQmVteEQ0aW16M3NyejBGUm5uNlR2aDNyeHFqNmZ6U1lJeGQ3TTdnOFpTM2ZtRnF4WDVMcmppaGctdDVPTUttNmN5Tm9BSWI0b2Z5bmhIaEp3cElaZWd2VEhMMUZ5aEg0eUVQQU5ZbGxJSEdSTEJ1RGZZckxZTVFXRzh1aW12b2FJN0lBeVpzTTRR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
+<div class="article-card" data-topic="workingpro" data-text="brandeis ba/mba program offers students a faster path to career success brandeis university brandeis ba/mba program offers students a faster path to career success  brandeis university"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #be185d;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE4wS2JXRU5XT3hianBNRzBDbXFtUnZKMjlSWDY5dkZqQmZlNHJHLTVSMjlpVnFrSnYyVE10UThtYzRsLUhrZVhHWEZUZk45TEhLbGxvZ3dZY1NqMjYyWlNKemc2VndLMTFtWVJMdGxZNFl2UHc4?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#be185d;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">Brandeis BA/MBA program offers students a faster path to career success</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Brandeis BA/MBA program offers students a faster path to career success  Brandeis University</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Brandeis University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 10, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE4wS2JXRU5XT3hianBNRzBDbXFtUnZKMjlSWDY5dkZqQmZlNHJHLTVSMjlpVnFrSnYyVE10UThtYzRsLUhrZVhHWEZUZk45TEhLbGxvZ3dZY1NqMjYyWlNKemc2VndLMTFtWVJMdGxZNFl2UHc4?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
 <div class="article-card" data-topic="execed" data-text="how tuck mba students learn business around the world dartmouth tuck school of business how tuck mba students learn business around the world  dartmouth tuck school of business"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -528,6 +603,20 @@
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Business schools are drumming up revenue by teaching the C-suite  marketplace.org</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">marketplace.org</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 19, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQS25DWHVNSS1od0JKNm45Snl4TmNyeEUzZ1dGWER1bjkyNmZxWUJDeldTYzhSYmdiTWtNeVo0XzRQM2hDLWF6b2J5Z1RwOHI2bXBVT0N4dF9pZVN3YzQ0ZDR5TWQzamtkWXAxUWZRZUNRczFQU2dpM2hldkJYUG1NLWtVT2lnYVc5Tk9qUGlxWm42enlmTVZBRkxLTzhuQWxEVXdUdTZaYzdoMWFH?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
+<div class="article-card" data-topic="execed" data-text="imd recognized among the world’s top business schools for executive education in ft rankings imd.org imd recognized among the world’s top business schools for executive education in ft rankings  imd.org"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOdnYtN3JobTVOYk1aUXFfZGViVkFobWZPdVh0U052c3U4QWhCV0VRWEx0MEVxeFJaQWFXTzF1ampPVTN6WE15RDVNV2JhSVNFeENZdXFzdFhBdTdqYmgzcldrbUxvNmVjMThLdE1UeHU5ZFF0U2ZwMzYxU29vVlQ4T09DWlllWmo3enp5c29WM1NmUmtqT295dXRJdVltZDJmV29jRUROQjZXbmRkdGg5MS0xekJFWndkT3NIcnVadUhodVhXV3BwN1FpWnZjSmtDSWlOWWlPQVRrUQ?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#0369a1;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">IMD recognized among the world’s top business schools for executive education in FT rankings</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">IMD recognized among the world’s top business schools for executive education in FT rankings  imd.org</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">imd.org</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 18, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOdnYtN3JobTVOYk1aUXFfZGViVkFobWZPdVh0U052c3U4QWhCV0VRWEx0MEVxeFJaQWFXTzF1ampPVTN6WE15RDVNV2JhSVNFeENZdXFzdFhBdTdqYmgzcldrbUxvNmVjMThLdE1UeHU5ZFF0U2ZwMzYxU29vVlQ4T09DWlllWmo3enp5c29WM1NmUmtqT295dXRJdVltZDJmV29jRUROQjZXbmRkdGg5MS0xekJFWndkT3NIcnVadUhodVhXV3BwN1FpWnZjSmtDSWlOWWlPQVRrUQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div>
 <div class="article-card" data-topic="execed" data-text="london business school tops 2026 financial times open-enrollment exec ed ranking, sda bocconi best for custom programs poets&amp;quants london business school tops 2026 financial times open-enrollment exec ed ranking, sda bocconi best for custom programs  poets&amp;quants"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -541,20 +630,6 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">London Business School Tops 2026 Financial Times Open-Enrollment Exec Ed Ranking, SDA Bocconi Best For Custom Programs  Poets&amp;Quants</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 18, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxNWjcwcF80UU1LcXhfX3M2SVFTLU52amowSS1vQUpfa1dQbW9tS2NTRGhjVnIyLVo4bzBiWlNLTktfSmw3bEJGMnpxM2tVSV94TzlJMU1HR0x4TzF6b19HbTdHZ2c1ZGZhb3JjNzVfSnYySmZHZ0FFdlRjNVpuam1OX2NjdDJSSFptUWRoeGUtclRHRjN6SXRMcUdaU3BQMnI3UjVucjNLb1U4eEdlS3l5bzM1em52QWhUcGFPdFhpZExWaF9DTFE2cXZWSUx6eTU5TUV4bm1ucVZmd21CVGgwZ1M2NjUtT25velRMcQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="execed" data-text="howard university office of executive education relaunches sherpa executive coaching certification program the dig at howard university howard university office of executive education relaunches sherpa executive coaching certification program  the dig at howard university"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNTUtKLXl4NGNBY1YtalVxUjhhRFF3Q2dBaDBQSVhiYmp3WWFHZXlQMVB5bjRYQ0hPOHZybGU5WGF5d2xybnZtOFREb3RqR3lRaDVfeTZGOWtzY09HY3JWdUxPQkd1aGlEajhNS1dDN3Ixakp5aU5nd0k4c2d4dnltNGlfREdSX1pPUUZEX0FkX2oxMHNWRGE2X0dfZlFKS1dBQzBKRXRvWm9QMGFSdHBkZzg0R1lFTnoyWGdsYjc2MmJvR3J6S1FQSGd0YmljZw?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#0369a1;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Howard University Office of Executive Education Relaunches Sherpa Executive Coaching Certification Program</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Howard University Office of Executive Education Relaunches Sherpa Executive Coaching Certification Program  The Dig at Howard University</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">The Dig at Howard University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 24, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNTUtKLXl4NGNBY1YtalVxUjhhRFF3Q2dBaDBQSVhiYmp3WWFHZXlQMVB5bjRYQ0hPOHZybGU5WGF5d2xybnZtOFREb3RqR3lRaDVfeTZGOWtzY09HY3JWdUxPQkd1aGlEajhNS1dDN3Ixakp5aU5nd0k4c2d4dnltNGlfREdSX1pPUUZEX0FkX2oxMHNWRGE2X0dfZlFKS1dBQzBKRXRvWm9QMGFSdHBkZzg0R1lFTnoyWGdsYjc2MmJvR3J6S1FQSGd0YmljZw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="execed" data-text="this 1 macro trend makes the value of a new mba less certain inc.com this 1 macro trend makes the value of a new mba less certain  inc.com"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
@@ -780,19 +855,19 @@
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Is a Business Degree Worth It? 6 Reasons Professionals Still Choose an MBA  Seattle University</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Seattle University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Mar 04, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxQdHJHamx5Y01naTcxaHh0bUU1eTJzTzVmcVZNdzV6aEhqYXJIUXE3bDVLNnVVbk44eTcwMllDczZ2LUd0MUFQRkN6RWhzMTdINTRqeFlPRjd2WFFZOW1pV3E0N1lhZkM2d0xrbzFEWVZQekFXSUhhUnJQWk1VSjVhc2lsUVQ3MkZGeDRKRFN3bG5kTHcxRy1Ub0F2RkxmR2dkSDd1c3JzbkxoQUZ1aUlPM0c1RUstZTl3TmU2TTItQzdCWEpoTjNDdjl6eXc?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
-<div class="article-card" data-topic="networking" data-text="financial times: alumni give business schools high marks – with a warning poets&amp;quants financial times: alumni give business schools high marks – with a warning  poets&amp;quants"
+<div class="article-card" data-topic="networking" data-text="spring 2019 - the launch of the women in business network villanova university spring 2019 - the launch of the women in business network  villanova university"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #6d28d9;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQWVFIZ3V0YnJqV09XWnA2aXplU0U0aGJQSEgwR1JzR1hfX20yOXdpV00xYmVyYUl1LTk5RFYwbU1uYWVUaWJmT3lTYUZRR09SY25tdlNwcUtPTmxZWTJuNGpGZWh1MlVBcDk0TmpvZTFHelZRMW80OU9OeG5rOGllcEdNd3N6TlpqSnp6RVNxYU5kNU5xVzNLR2dGUHhLRWtKTlRPb3hRU1dXakNjdVE?oc=5" target="_blank" rel="noopener noreferrer"
+    <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNOWt3c3BvYXpqNm9UYXc0dWp0d0p3LWFTNmhQX2FXaWozNXNzNUJwcnExSm5TTWJHS3NUVjlIdUpZblBjeEc1NlJpbW5oZFVoUjBRck9HTGFab3ZuVFE1eUxUMkc2RUtmMzJPQ25PdUVZSElMUGtPSUdOYWRsUDV1TWVzbFRZNHl1TUlUcGhJNmNqU2lUd1ZPcHhSVzFDeTRZZ1VfWHE1M2RibXV3RUh1RFI2VVl2QTZFNDYxNkVqRVJkbVFLRjh6aGNiUzNQdEU?oc=5" target="_blank" rel="noopener noreferrer"
        style="color:#6d28d9;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Financial Times: Alumni Give Business Schools High Marks – With A Warning</a>
+       onmouseout="this.style.textDecoration='none'">Spring 2019 - The Launch of the Women in Business Network</a>
   </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Financial Times: Alumni Give Business Schools High Marks – With A Warning  Poets&amp;Quants</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 10, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQWVFIZ3V0YnJqV09XWnA2aXplU0U0aGJQSEgwR1JzR1hfX20yOXdpV00xYmVyYUl1LTk5RFYwbU1uYWVUaWJmT3lTYUZRR09SY25tdlNwcUtPTmxZWTJuNGpGZWh1MlVBcDk0TmpvZTFHelZRMW80OU9OeG5rOGllcEdNd3N6TlpqSnp6RVNxYU5kNU5xVzNLR2dGUHhLRWtKTlRPb3hRU1dXakNjdVE?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Spring 2019 - The Launch of the Women in Business Network  Villanova University</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Villanova University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 11, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNOWt3c3BvYXpqNm9UYXc0dWp0d0p3LWFTNmhQX2FXaWozNXNzNUJwcnExSm5TTWJHS3NUVjlIdUpZblBjeEc1NlJpbW5oZFVoUjBRck9HTGFab3ZuVFE1eUxUMkc2RUtmMzJPQ25PdUVZSElMUGtPSUdOYWRsUDV1TWVzbFRZNHl1TUlUcGhJNmNqU2lUd1ZPcHhSVzFDeTRZZ1VfWHE1M2RibXV3RUh1RFI2VVl2QTZFNDYxNkVqRVJkbVFLRjh6aGNiUzNQdEU?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 <div class="article-card" data-topic="networking" data-text="mba graduates rethink career paths in a slower job market find mba mba graduates rethink career paths in a slower job market  find mba"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #6d28d9;border-radius:8px;
@@ -835,8 +910,25 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">How the Alumni Drive Babson’s Successes · Babson Magazine  Babson College</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Babson College</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 10, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1rejk4NTBpZ09RdHU4WUlqSVNrRXR5WUNWVDNKb2JXS3BDekpsSXVDamNIYmpGSVU4SDFJRXFwWTROblA5MkZSN0d3YnlHbWxTcGZPZE01ZEl3d2tsZC1QdjVCdWNSUmc?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="mccombs" data-text="nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin the university of texas at austin nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin  the university of texas at austin"
+</div></div>
+      <div id="no-results-msg" style="display:none;text-align:center;color:#94a3b8;padding:32px;font-size:14px;">No articles found matching your search.</div>
+    </div>
+
+    <!-- Topic sections -->
+    <div id="topic-sections"><div id="mccombs" style="margin-bottom:44px;">
+  <div style="display:flex;align-items:center;gap:12px;background:#FDF0E8;
+       border:1px solid #F4C6A0;border-radius:10px;padding:14px 20px;margin-bottom:18px;">
+    <span style="font-size:24px;">🤘</span>
+    <div>
+      <div style="font-size:16px;font-weight:800;color:#BF5700;font-family:Georgia,serif;">
+        McCombs MBA
+      </div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
+    </div>
+    <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
+       onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
+  </div>
+  <div class="article-card" data-topic="mccombs" data-text="nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin the university of texas at austin nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin  the university of texas at austin"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
@@ -849,8 +941,7 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">NEXXUS Strengthens Cross-Disciplinary Healthcare Entrepreneur Preparation at UT Austin  The University of Texas at Austin</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">The University of Texas at Austin</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDRPd3VyVlIzTi1QSHNFLVQtcU1JWmNORnlxNVAyd2tab2JSZkFsZl9qUlo2ajhJNWZid0JHWG1wOHFoeS1oSF9EdFlydDZLNG9iNzN4T0thdlVQMWNSbVE5M1ZlZzRRU0lTYlY0Y195RkxCMC1OMjhTV1RPVTFtZUZUUlVjcjNaWFhNSmpXeDJGdjhIYUNWQXdPdEU5TkQ3UkoyaE5meDNUTG40UVVKMkJlN3Y3X28?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="mccombs" data-text="ut names new dean to lead mccombs school of business austin american-statesman ut names new dean to lead mccombs school of business  austin american-statesman"
+</div><div class="article-card" data-topic="mccombs" data-text="ut names new dean to lead mccombs school of business austin american-statesman ut names new dean to lead mccombs school of business  austin american-statesman"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
@@ -863,8 +954,7 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">UT names new dean to lead McCombs School of Business  Austin American-Statesman</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Austin American-Statesman</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 01, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQY1RWanNRZmZhU2N1RTNVc3RMRTNUcGI0R01CSkNzZnF3eDhON2NGcEtuMlNzYko5UnhCalBUNTY2ZWI0Vy1oOUVvcFlxOVRrNXpxbV9hczZFb1huTjcyaDJrS0JMbktiUld0WWRIcWphZHgxVVUya0MyYW9pQnhsOEtUdnIxOGZDbXFGcmpJNXhaRDFzelBSUHVwX0tRaW43cEZlZlBnMGU5Y01CSEc1ZjZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="mccombs" data-text="bradley staats appointed dean of mccombs school of business ut austin news bradley staats appointed dean of mccombs school of business  ut austin news"
+</div><div class="article-card" data-topic="mccombs" data-text="bradley staats appointed dean of mccombs school of business ut austin news bradley staats appointed dean of mccombs school of business  ut austin news"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
@@ -877,8 +967,7 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Bradley Staats Appointed Dean of McCombs School of Business  UT Austin News</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">UT Austin News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 30, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPZlBGOTg2NUlTTE04NmxyUnFoY2ViS1ZzTWg0T3FoeGdPc2JqT1A3OFJqaG5yUzJkeWpoUDZ3ZWRod3R4UXd1cVRhRW9YNnFMWGVrdHdfd1VheWdrX21qZHhOV2NjOXBNZkhHMEh2MFB0Zk5Ga21kcUo0YndyOGxNUWxxeWkzRXBiS3NLbEprcjhQTzhtOE1jMkt5VQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="mccombs" data-text="texas mccombs expands md-mba pipeline to houston with new dual degree poets&amp;quants texas mccombs expands md-mba pipeline to houston with new dual degree  poets&amp;quants"
+</div><div class="article-card" data-topic="mccombs" data-text="texas mccombs expands md-mba pipeline to houston with new dual degree poets&amp;quants texas mccombs expands md-mba pipeline to houston with new dual degree  poets&amp;quants"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
@@ -891,8 +980,7 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Texas McCombs Expands MD-MBA Pipeline To Houston With New Dual Degree  Poets&amp;Quants</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 27, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNekFXLUw1Mi12c0tWM01SS1Zmdl9Nb1Z3Mm9UVzdlNFh5elhUZUt2eU5JS2VmWWFSSGliNUNRb3hwclpxMGFXbTB3WERVazZvdXVuVjkzQ0lDM1hJZG5QU0I4Znc0NW02RXhmNTdWek5KTlA0cndtT3FmX2Y4aFpyUTBUcWlWZzE3UEtVcml0eEhWdmExUzdHMkE5SWlCUVNXZ1RoOGxrLWdJRFJ1?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="mccombs" data-text="ut business school opening at city centre realty news report ut business school opening at city centre  realty news report"
+</div><div class="article-card" data-topic="mccombs" data-text="ut business school opening at city centre realty news report ut business school opening at city centre  realty news report"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
@@ -905,8 +993,7 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">UT Business School Opening at City Centre  Realty News Report</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Realty News Report</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Jan 14, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE5IUXRUVVhtYm5xR0F1TmhfZFRZVEw0bTNXcGZXZlNwY2RjODdQdjhhOGN0MXQzSTVmYVZvUjVwSU1JU1UxNDZ6dXFxU19aWjVEY1J0TjVlam1IbWNRWDZ4eGw5US1vUjJVV0czNmV1R1RGLVFiS2syOWxmbw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-<div class="article-card" data-topic="mccombs" data-text="what are the best business schools in texas? graduate management admission council what are the best business schools in texas?  graduate management admission council"
+</div><div class="article-card" data-topic="mccombs" data-text="what are the best business schools in texas? graduate management admission council what are the best business schools in texas?  graduate management admission council"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
@@ -919,103 +1006,98 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">What are the best business schools in Texas?  Graduate Management Admission Council</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Jan 09, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNTUJNa3o3TDRGVEZfUm9Za3UtdllycGgwSlRkYXVkQ1gycXJOTlZiZHpYSHV1NE1qQlBLRXZiSHladnFPaXdZZVN2NWFWaDR3N3RZUUcwUjFjandRTUFpM1o5WWpQWXF2blFSc2F5TmdfZG43VTRTc0kycXlXSE43Q1Z4MEVvQzJpcm1Ib0NfcUV0M1hybFJNMGhn?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div></div>
-      <div class="no-results" id="no-results-msg">No articles found matching your search.</div>
-    </div>
-
-    <!-- Normal topic sections -->
-    <div id="topic-sections">
-      <div id="coaching" style="margin-bottom:44px;">
-  <div style="display:flex;align-items:center;gap:12px;background:#FDF0E8;
-       border:1px solid #F4C6A0;border-radius:10px;padding:14px 20px;margin-bottom:18px;">
+</div>
+</div><div id="coaching" style="margin-bottom:44px;">
+  <div style="display:flex;align-items:center;gap:12px;background:#eff6ff;
+       border:1px solid #bfdbfe;border-radius:10px;padding:14px 20px;margin-bottom:18px;">
     <span style="font-size:24px;">🎓</span>
     <div>
-      <div style="font-size:16px;font-weight:800;color:#BF5700;font-family:Georgia,serif;">
+      <div style="font-size:16px;font-weight:800;color:#1d4ed8;font-family:Georgia,serif;">
         MBA &amp; Career Coaching
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
   </div>
   <div class="article-card" data-topic="coaching" data-text="anxious parents are spending more than $50,000 to land their kid a job bloomberg.com anxious parents are spending more than $50,000 to land their kid a job  bloomberg.com"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQnpjNXR6RDQ4dkUyRUpxVTU4aE5Dbk9CZTlqUElhbWV4MHZPN2loUjU1dXViX1MwYjRQOHR6R004SlJMOVBLR2ZSNGt5Mko1M3ZUcVk4TjhnMXN5TDlDclV1NzlGaW04VHQ5YWNuSnZJemxxUWtKQzFwb3hKd0QtMUJCNV9OczRzVDZYLXZaeWlTb1lnc3doSmJZR2dtWExFX29RUTNCUlBlWWxYWlo5TVBsNjhORE1JWE9DMDJkSlF5NDQ?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">Anxious Parents Are Spending More Than $50,000 to Land Their Kid a Job</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Anxious Parents Are Spending More Than $50,000 to Land Their Kid a Job  Bloomberg.com</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Bloomberg.com</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQnpjNXR6RDQ4dkUyRUpxVTU4aE5Dbk9CZTlqUElhbWV4MHZPN2loUjU1dXViX1MwYjRQOHR6R004SlJMOVBLR2ZSNGt5Mko1M3ZUcVk4TjhnMXN5TDlDclV1NzlGaW04VHQ5YWNuSnZJemxxUWtKQzFwb3hKd0QtMUJCNV9OczRzVDZYLXZaeWlTb1lnc3doSmJZR2dtWExFX29RUTNCUlBlWWxYWlo5TVBsNjhORE1JWE9DMDJkSlF5NDQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Bloomberg.com</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQnpjNXR6RDQ4dkUyRUpxVTU4aE5Dbk9CZTlqUElhbWV4MHZPN2loUjU1dXViX1MwYjRQOHR6R004SlJMOVBLR2ZSNGt5Mko1M3ZUcVk4TjhnMXN5TDlDclV1NzlGaW04VHQ5YWNuSnZJemxxUWtKQzFwb3hKd0QtMUJCNV9OczRzVDZYLXZaeWlTb1lnc3doSmJZR2dtWExFX29RUTNCUlBlWWxYWlo5TVBsNjhORE1JWE9DMDJkSlF5NDQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="coaching" data-text="mba career pivots are happening earlier than ever find mba mba career pivots are happening earlier than ever  find mba"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOcjZXRTlQQ1RRNkN1MkZ3UEx4ZG10UUZrMC1mRkpXenhpT2dlWE1pQkpOeTFXQUc2dlRkN2EzdHNlbVFPZHNpaTV3TUpPVTRWUjRra2JRcW1RVHN1X0pVenRxdnppRF95Mm1RLUg2aURQM2N5eTZtTDR6anc4dXo5LVkxSmVnQQ?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">MBA Career Pivots are Happening Earlier Than Ever</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">MBA Career Pivots are Happening Earlier Than Ever  FIND MBA</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">FIND MBA</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Mar 17, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOcjZXRTlQQ1RRNkN1MkZ3UEx4ZG10UUZrMC1mRkpXenhpT2dlWE1pQkpOeTFXQUc2dlRkN2EzdHNlbVFPZHNpaTV3TUpPVTRWUjRra2JRcW1RVHN1X0pVenRxdnppRF95Mm1RLUg2aURQM2N5eTZtTDR6anc4dXo5LVkxSmVnQQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">FIND MBA</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Mar 17, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOcjZXRTlQQ1RRNkN1MkZ3UEx4ZG10UUZrMC1mRkpXenhpT2dlWE1pQkpOeTFXQUc2dlRkN2EzdHNlbVFPZHNpaTV3TUpPVTRWUjRra2JRcW1RVHN1X0pVenRxdnppRF95Mm1RLUg2aURQM2N5eTZtTDR6anc4dXo5LVkxSmVnQQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="coaching" data-text="how one premier european b-school’s careers team coaches students to get hired poets&amp;quants how one premier european b-school’s careers team coaches students to get hired  poets&amp;quants"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQdk9icFdGSXE3ZVRBTEdFZ0oyRWlyRWlKZDY3cWpFWTRLSklGaUUtR2VZQTJuTmIxTkxoV1ptS3d5VUdSM3ZtbUNlczFEVzQ5ZGx5em00cWpRcjdMSy1FRWpDenp4Tmk5a0FLcjVoNWpveWYyN2Nab2FLQ3hUZHZmUlo2ODZoRzVERElPbDlpcTZtOGc4OWExbTBLNU5uR1NycTYzdUdDR2JjX3NMMFRoODNVVE5lbU0?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">How One Premier European B-School’s Careers Team Coaches Students To Get Hired</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">How One Premier European B-School’s Careers Team Coaches Students To Get Hired  Poets&amp;Quants</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQdk9icFdGSXE3ZVRBTEdFZ0oyRWlyRWlKZDY3cWpFWTRLSklGaUUtR2VZQTJuTmIxTkxoV1ptS3d5VUdSM3ZtbUNlczFEVzQ5ZGx5em00cWpRcjdMSy1FRWpDenp4Tmk5a0FLcjVoNWpveWYyN2Nab2FLQ3hUZHZmUlo2ODZoRzVERElPbDlpcTZtOGc4OWExbTBLNU5uR1NycTYzdUdDR2JjX3NMMFRoODNVVE5lbU0?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQdk9icFdGSXE3ZVRBTEdFZ0oyRWlyRWlKZDY3cWpFWTRLSklGaUUtR2VZQTJuTmIxTkxoV1ptS3d5VUdSM3ZtbUNlczFEVzQ5ZGx5em00cWpRcjdMSy1FRWpDenp4Tmk5a0FLcjVoNWpveWYyN2Nab2FLQ3hUZHZmUlo2ODZoRzVERElPbDlpcTZtOGc4OWExbTBLNU5uR1NycTYzdUdDR2JjX3NMMFRoODNVVE5lbU0?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="coaching" data-text="the notre dame mba helped put lauren suga on the path to her dream job mendoza college of business the notre dame mba helped put lauren suga on the path to her dream job  mendoza college of business"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5wUGVkaVAyaVVsQmNORkZ0TEpKSG9zYURSZkJOOHBoaC05YVhJQmxGR0VYT3A5YllhVTI3Tm1ZZ184dXYxb2pHNEI1b21XT2JmbjM2X2pUdS1kM3llY0ZR?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">The Notre Dame MBA helped put Lauren Suga on the path to her dream job</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">The Notre Dame MBA helped put Lauren Suga on the path to her dream job  Mendoza College of Business</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Mendoza College of Business</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5wUGVkaVAyaVVsQmNORkZ0TEpKSG9zYURSZkJOOHBoaC05YVhJQmxGR0VYT3A5YllhVTI3Tm1ZZ184dXYxb2pHNEI1b21XT2JmbjM2X2pUdS1kM3llY0ZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Mendoza College of Business</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 13, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5wUGVkaVAyaVVsQmNORkZ0TEpKSG9zYURSZkJOOHBoaC05YVhJQmxGR0VYT3A5YllhVTI3Tm1ZZ184dXYxb2pHNEI1b21XT2JmbjM2X2pUdS1kM3llY0ZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="coaching" data-text="jumpstart your future at the toppel career center university of miami news jumpstart your future at the toppel career center  university of miami news"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQSjJ3M1hNOFl3SVFMR2RUTkdPRWlSTElhY0ZvdkpaYnBPbDdLd2xDQkt2SWpSYzlDSzRCRkV6SUVlSFlvTjVHT3Vxem9vSnAyXzI2YjJRTmdwblNjc0FUR0VhcFk1UTVMeUpjTkhLMkNzVFctMEJ3TXBPRVphMi04aW54eVZBQTFveWhKSkhwZDBtUjNPYktXTg?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">Jumpstart your future at the Toppel Career Center</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Jumpstart your future at the Toppel Career Center  University of Miami News</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">University of Miami News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 14, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQSjJ3M1hNOFl3SVFMR2RUTkdPRWlSTElhY0ZvdkpaYnBPbDdLd2xDQkt2SWpSYzlDSzRCRkV6SUVlSFlvTjVHT3Vxem9vSnAyXzI2YjJRTmdwblNjc0FUR0VhcFk1UTVMeUpjTkhLMkNzVFctMEJ3TXBPRVphMi04aW54eVZBQTFveWhKSkhwZDBtUjNPYktXTg?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">University of Miami News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 14, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQSjJ3M1hNOFl3SVFMR2RUTkdPRWlSTElhY0ZvdkpaYnBPbDdLd2xDQkt2SWpSYzlDSzRCRkV6SUVlSFlvTjVHT3Vxem9vSnAyXzI2YjJRTmdwblNjc0FUR0VhcFk1UTVMeUpjTkhLMkNzVFctMEJ3TXBPRVphMi04aW54eVZBQTFveWhKSkhwZDBtUjNPYktXTg?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="coaching" data-text="6 reasons why business school is a great choice for veterans graduate management admission council 6 reasons why business school is a great choice for veterans  graduate management admission council"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #1d4ed8;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
     <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNY3JFa0l0aDN6WnpMQmtjMno3cEdfS0J3a2dKbmc3empIdHVMTjhOWUZObGJxMUJSSncycE9tYk1yN2l2RE0tSlRLbFV3Vi1KM2VWX2wyRWNRVnNnVE8tLTdFRHczNVNYMFJ6SEk5OHQtNkZGME1hNTNncXBPWU41UjU0UjExM2pKcG5ITF94ZHBfdEJ6VFdpTS0tZUtuU19BV2M3c0NEWXZId25HLUE?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
+       style="color:#1d4ed8;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
        onmouseout="this.style.textDecoration='none'">6 Reasons Why Business School Is A Great Choice For Veterans</a>
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">6 Reasons Why Business School Is A Great Choice For Veterans  Graduate Management Admission Council</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 11, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNY3JFa0l0aDN6WnpMQmtjMno3cEdfS0J3a2dKbmc3empIdHVMTjhOWUZObGJxMUJSSncycE9tYk1yN2l2RE0tSlRLbFV3Vi1KM2VWX2wyRWNRVnNnVE8tLTdFRHczNVNYMFJ6SEk5OHQtNkZGME1hNTNncXBPWU41UjU0UjExM2pKcG5ITF94ZHBfdEJ6VFdpTS0tZUtuU19BV2M3c0NEWXZId25HLUE?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 11, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNY3JFa0l0aDN6WnpMQmtjMno3cEdfS0J3a2dKbmc3empIdHVMTjhOWUZObGJxMUJSSncycE9tYk1yN2l2RE0tSlRLbFV3Vi1KM2VWX2wyRWNRVnNnVE8tLTdFRHczNVNYMFJ6SEk5OHQtNkZGME1hNTNncXBPWU41UjU0UjExM2pKcG5ITF94ZHBfdEJ6VFdpTS0tZUtuU19BV2M3c0NEWXZId25HLUE?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#1d4ed8;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 </div><div id="advising" style="margin-bottom:44px;">
   <div style="display:flex;align-items:center;gap:12px;background:#f0fdfa;
@@ -1025,7 +1107,7 @@
       <div style="font-size:16px;font-weight:800;color:#0f766e;font-family:Georgia,serif;">
         MBA &amp; Career Advising
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1117,7 +1199,7 @@
       <div style="font-size:16px;font-weight:800;color:#7c3aed;font-family:Georgia,serif;">
         MBA &amp; Artificial Intelligence
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1209,7 +1291,7 @@
       <div style="font-size:16px;font-weight:800;color:#b45309;font-family:Georgia,serif;">
         AI in Career Coaching &amp; Advising
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1301,7 +1383,7 @@
       <div style="font-size:16px;font-weight:800;color:#be185d;font-family:Georgia,serif;">
         MBA for Working Professionals
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1319,19 +1401,6 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">How to Choose an Accredited Fully Online MBA: A Practical Guide for Working Professionals  Nexford University</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Nexford University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 06, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaDhuZ3ljU3V4a3NuYVRULVE5ZFl5eFlQcEdFN2NIaGRtOVNIRjc2bzhlRGY3OHY2blFOQ0YtVWItb3BROGpwdk5MZzVXd1BiM1RTbDJqd29zaDZmTXhkZzVWbXVpNXUycWxqajQ4TEFBUHJEMFptT0N2bDBPalk2cElRb9IBkwFBVV95cUxPWEoydWs0YXlTODUxUGtJTDdCN3B3YV9Tb3c0SmY1NEFuNkw2MUY2V0dKWHBhNEo5cUZpamd5WmlMMEdPZ2tmM0JGMk9oNkNKM3MxanBjemxlZXNXNlRjMWVMam54ejhHOVRsNV83bjQ2eWs4RWJxLUhGTWhLY2xDUktFY010UC15d2ZmdUdyQTdPdnc?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="workingpro" data-text="best online mba programs in florida: 2026 comparison nexford university best online mba programs in florida: 2026 comparison  nexford university"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #be185d;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTFByR0xUVy16MVJ1UDU2UzBmX25PV0MtS0tMenBfOEhSZ1BLYVQ4dzNZb3FFdGVEQUc0OXN3X041RFdhdmplaVZVQXN1WnZCUk5WLXZSSWpBd3NVTXhCdXBJUHRIbjFsS0FDcWdPV2lEMGo5VDhRR1N30gGHAUFVX3lxTE4zc2YxWkJGMW43LU9JN1FENEE2MEw1cWZXb1hVNm95Y0pGYktpOWFmNzNuU2Npd3Z4TGhyOE1QdTFMWHVmM2tOQ0hiT2lvQWt6d0EwM3pxZmtyc1hDZDY5aER2ZFNoXzNxVEtCZHdEVFFOYnB1SnlqaE85RFdNRVoxZUZYcTBGdw?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#be185d;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Best Online MBA Programs in Florida: 2026 Comparison</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Best Online MBA Programs in Florida: 2026 Comparison  Nexford University</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Nexford University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 24, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMid0FVX3lxTFByR0xUVy16MVJ1UDU2UzBmX25PV0MtS0tMenBfOEhSZ1BLYVQ4dzNZb3FFdGVEQUc0OXN3X041RFdhdmplaVZVQXN1WnZCUk5WLXZSSWpBd3NVTXhCdXBJUHRIbjFsS0FDcWdPV2lEMGo5VDhRR1N30gGHAUFVX3lxTE4zc2YxWkJGMW43LU9JN1FENEE2MEw1cWZXb1hVNm95Y0pGYktpOWFmNzNuU2Npd3Z4TGhyOE1QdTFMWHVmM2tOQ0hiT2lvQWt6d0EwM3pxZmtyc1hDZDY5aER2ZFNoXzNxVEtCZHdEVFFOYnB1SnlqaE85RFdNRVoxZUZYcTBGdw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="workingpro" data-text="the ultimate guide to choosing a part-time mba at imperial imperial college london the ultimate guide to choosing a part-time mba at imperial  imperial college london"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #be185d;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -1384,6 +1453,19 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">A Marathon, Not a Sprint: Thriving Through a Three-Year Part-Time MBA  Darden Report Online</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Darden Report Online</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 26, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOdU1DUFVMUDg0M2xfcDFaUHAwbWJwVDUtTWplbjRoTWdrQmVteEQ0aW16M3NyejBGUm5uNlR2aDNyeHFqNmZ6U1lJeGQ3TTdnOFpTM2ZtRnF4WDVMcmppaGctdDVPTUttNmN5Tm9BSWI0b2Z5bmhIaEp3cElaZWd2VEhMMUZ5aEg0eUVQQU5ZbGxJSEdSTEJ1RGZZckxZTVFXRzh1aW12b2FJN0lBeVpzTTRR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div><div class="article-card" data-topic="workingpro" data-text="brandeis ba/mba program offers students a faster path to career success brandeis university brandeis ba/mba program offers students a faster path to career success  brandeis university"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #be185d;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE4wS2JXRU5XT3hianBNRzBDbXFtUnZKMjlSWDY5dkZqQmZlNHJHLTVSMjlpVnFrSnYyVE10UThtYzRsLUhrZVhHWEZUZk45TEhLbGxvZ3dZY1NqMjYyWlNKemc2VndLMTFtWVJMdGxZNFl2UHc4?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#be185d;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">Brandeis BA/MBA program offers students a faster path to career success</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Brandeis BA/MBA program offers students a faster path to career success  Brandeis University</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Brandeis University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 10, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE4wS2JXRU5XT3hianBNRzBDbXFtUnZKMjlSWDY5dkZqQmZlNHJHLTVSMjlpVnFrSnYyVE10UThtYzRsLUhrZVhHWEZUZk45TEhLbGxvZ3dZY1NqMjYyWlNKemc2VndLMTFtWVJMdGxZNFl2UHc4?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#be185d;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
 </div><div id="execed" style="margin-bottom:44px;">
   <div style="display:flex;align-items:center;gap:12px;background:#f0f9ff;
@@ -1393,7 +1475,7 @@
       <div style="font-size:16px;font-weight:800;color:#0369a1;font-family:Georgia,serif;">
         MBA &amp; Executive Education
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1424,6 +1506,19 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Business schools are drumming up revenue by teaching the C-suite  marketplace.org</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">marketplace.org</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 19, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQS25DWHVNSS1od0JKNm45Snl4TmNyeEUzZ1dGWER1bjkyNmZxWUJDeldTYzhSYmdiTWtNeVo0XzRQM2hDLWF6b2J5Z1RwOHI2bXBVT0N4dF9pZVN3YzQ0ZDR5TWQzamtkWXAxUWZRZUNRczFQU2dpM2hldkJYUG1NLWtVT2lnYVc5Tk9qUGlxWm42enlmTVZBRkxLTzhuQWxEVXdUdTZaYzdoMWFH?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+</div><div class="article-card" data-topic="execed" data-text="imd recognized among the world’s top business schools for executive education in ft rankings imd.org imd recognized among the world’s top business schools for executive education in ft rankings  imd.org"
+     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
+            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
+     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
+     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
+  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
+    <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOdnYtN3JobTVOYk1aUXFfZGViVkFobWZPdVh0U052c3U4QWhCV0VRWEx0MEVxeFJaQWFXTzF1ampPVTN6WE15RDVNV2JhSVNFeENZdXFzdFhBdTdqYmgzcldrbUxvNmVjMThLdE1UeHU5ZFF0U2ZwMzYxU29vVlQ4T09DWlllWmo3enp5c29WM1NmUmtqT295dXRJdVltZDJmV29jRUROQjZXbmRkdGg5MS0xekJFWndkT3NIcnVadUhodVhXV3BwN1FpWnZjSmtDSWlOWWlPQVRrUQ?oc=5" target="_blank" rel="noopener noreferrer"
+       style="color:#0369a1;text-decoration:none;"
+       onmouseover="this.style.textDecoration='underline'"
+       onmouseout="this.style.textDecoration='none'">IMD recognized among the world’s top business schools for executive education in FT rankings</a>
+  </div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">IMD recognized among the world’s top business schools for executive education in FT rankings  imd.org</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">imd.org</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 18, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOdnYtN3JobTVOYk1aUXFfZGViVkFobWZPdVh0U052c3U4QWhCV0VRWEx0MEVxeFJaQWFXTzF1ampPVTN6WE15RDVNV2JhSVNFeENZdXFzdFhBdTdqYmgzcldrbUxvNmVjMThLdE1UeHU5ZFF0U2ZwMzYxU29vVlQ4T09DWlllWmo3enp5c29WM1NmUmtqT295dXRJdVltZDJmV29jRUROQjZXbmRkdGg5MS0xekJFWndkT3NIcnVadUhodVhXV3BwN1FpWnZjSmtDSWlOWWlPQVRrUQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="execed" data-text="london business school tops 2026 financial times open-enrollment exec ed ranking, sda bocconi best for custom programs poets&amp;quants london business school tops 2026 financial times open-enrollment exec ed ranking, sda bocconi best for custom programs  poets&amp;quants"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -1437,19 +1532,6 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">London Business School Tops 2026 Financial Times Open-Enrollment Exec Ed Ranking, SDA Bocconi Best For Custom Programs  Poets&amp;Quants</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 18, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxNWjcwcF80UU1LcXhfX3M2SVFTLU52amowSS1vQUpfa1dQbW9tS2NTRGhjVnIyLVo4bzBiWlNLTktfSmw3bEJGMnpxM2tVSV94TzlJMU1HR0x4TzF6b19HbTdHZ2c1ZGZhb3JjNzVfSnYySmZHZ0FFdlRjNVpuam1OX2NjdDJSSFptUWRoeGUtclRHRjN6SXRMcUdaU3BQMnI3UjVucjNLb1U4eEdlS3l5bzM1em52QWhUcGFPdFhpZExWaF9DTFE2cXZWSUx6eTU5TUV4bm1ucVZmd21CVGgwZ1M2NjUtT25velRMcQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="execed" data-text="howard university office of executive education relaunches sherpa executive coaching certification program the dig at howard university howard university office of executive education relaunches sherpa executive coaching certification program  the dig at howard university"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNTUtKLXl4NGNBY1YtalVxUjhhRFF3Q2dBaDBQSVhiYmp3WWFHZXlQMVB5bjRYQ0hPOHZybGU5WGF5d2xybnZtOFREb3RqR3lRaDVfeTZGOWtzY09HY3JWdUxPQkd1aGlEajhNS1dDN3Ixakp5aU5nd0k4c2d4dnltNGlfREdSX1pPUUZEX0FkX2oxMHNWRGE2X0dfZlFKS1dBQzBKRXRvWm9QMGFSdHBkZzg0R1lFTnoyWGdsYjc2MmJvR3J6S1FQSGd0YmljZw?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#0369a1;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Howard University Office of Executive Education Relaunches Sherpa Executive Coaching Certification Program</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Howard University Office of Executive Education Relaunches Sherpa Executive Coaching Certification Program  The Dig at Howard University</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">The Dig at Howard University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 24, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNTUtKLXl4NGNBY1YtalVxUjhhRFF3Q2dBaDBQSVhiYmp3WWFHZXlQMVB5bjRYQ0hPOHZybGU5WGF5d2xybnZtOFREb3RqR3lRaDVfeTZGOWtzY09HY3JWdUxPQkd1aGlEajhNS1dDN3Ixakp5aU5nd0k4c2d4dnltNGlfREdSX1pPUUZEX0FkX2oxMHNWRGE2X0dfZlFKS1dBQzBKRXRvWm9QMGFSdHBkZzg0R1lFTnoyWGdsYjc2MmJvR3J6S1FQSGd0YmljZw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#0369a1;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="execed" data-text="this 1 macro trend makes the value of a new mba less certain inc.com this 1 macro trend makes the value of a new mba less certain  inc.com"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #0369a1;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -1485,7 +1567,7 @@
       <div style="font-size:16px;font-weight:800;color:#15803d;font-family:Georgia,serif;">
         MBA Return on Investment
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1577,7 +1659,7 @@
       <div style="font-size:16px;font-weight:800;color:#0891b2;font-family:Georgia,serif;">
         MBA Online Programs
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1669,7 +1751,7 @@
       <div style="font-size:16px;font-weight:800;color:#6d28d9;font-family:Georgia,serif;">
         MBA &amp; Networking
       </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
+      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found · sorted by date</div>
     </div>
     <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
        onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
@@ -1700,19 +1782,19 @@
   </div>
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Is a Business Degree Worth It? 6 Reasons Professionals Still Choose an MBA  Seattle University</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Seattle University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Mar 04, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxQdHJHamx5Y01naTcxaHh0bUU1eTJzTzVmcVZNdzV6aEhqYXJIUXE3bDVLNnVVbk44eTcwMllDczZ2LUd0MUFQRkN6RWhzMTdINTRqeFlPRjd2WFFZOW1pV3E0N1lhZkM2d0xrbzFEWVZQekFXSUhhUnJQWk1VSjVhc2lsUVQ3MkZGeDRKRFN3bG5kTHcxRy1Ub0F2RkxmR2dkSDd1c3JzbkxoQUZ1aUlPM0c1RUstZTl3TmU2TTItQzdCWEpoTjNDdjl6eXc?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="networking" data-text="financial times: alumni give business schools high marks – with a warning poets&amp;quants financial times: alumni give business schools high marks – with a warning  poets&amp;quants"
+</div><div class="article-card" data-topic="networking" data-text="spring 2019 - the launch of the women in business network villanova university spring 2019 - the launch of the women in business network  villanova university"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #6d28d9;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
      onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
      onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
   <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQWVFIZ3V0YnJqV09XWnA2aXplU0U0aGJQSEgwR1JzR1hfX20yOXdpV00xYmVyYUl1LTk5RFYwbU1uYWVUaWJmT3lTYUZRR09SY25tdlNwcUtPTmxZWTJuNGpGZWh1MlVBcDk0TmpvZTFHelZRMW80OU9OeG5rOGllcEdNd3N6TlpqSnp6RVNxYU5kNU5xVzNLR2dGUHhLRWtKTlRPb3hRU1dXakNjdVE?oc=5" target="_blank" rel="noopener noreferrer"
+    <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNOWt3c3BvYXpqNm9UYXc0dWp0d0p3LWFTNmhQX2FXaWozNXNzNUJwcnExSm5TTWJHS3NUVjlIdUpZblBjeEc1NlJpbW5oZFVoUjBRck9HTGFab3ZuVFE1eUxUMkc2RUtmMzJPQ25PdUVZSElMUGtPSUdOYWRsUDV1TWVzbFRZNHl1TUlUcGhJNmNqU2lUd1ZPcHhSVzFDeTRZZ1VfWHE1M2RibXV3RUh1RFI2VVl2QTZFNDYxNkVqRVJkbVFLRjh6aGNiUzNQdEU?oc=5" target="_blank" rel="noopener noreferrer"
        style="color:#6d28d9;text-decoration:none;"
        onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Financial Times: Alumni Give Business Schools High Marks – With A Warning</a>
+       onmouseout="this.style.textDecoration='none'">Spring 2019 - The Launch of the Women in Business Network</a>
   </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Financial Times: Alumni Give Business Schools High Marks – With A Warning  Poets&amp;Quants</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 10, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQWVFIZ3V0YnJqV09XWnA2aXplU0U0aGJQSEgwR1JzR1hfX20yOXdpV00xYmVyYUl1LTk5RFYwbU1uYWVUaWJmT3lTYUZRR09SY25tdlNwcUtPTmxZWTJuNGpGZWh1MlVBcDk0TmpvZTFHelZRMW80OU9OeG5rOGllcEdNd3N6TlpqSnp6RVNxYU5kNU5xVzNLR2dGUHhLRWtKTlRPb3hRU1dXakNjdVE?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
+  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Spring 2019 - The Launch of the Women in Business Network  Villanova University</p>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Villanova University</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Feb 11, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxNOWt3c3BvYXpqNm9UYXc0dWp0d0p3LWFTNmhQX2FXaWozNXNzNUJwcnExSm5TTWJHS3NUVjlIdUpZblBjeEc1NlJpbW5oZFVoUjBRck9HTGFab3ZuVFE1eUxUMkc2RUtmMzJPQ25PdUVZSElMUGtPSUdOYWRsUDV1TWVzbFRZNHl1TUlUcGhJNmNqU2lUd1ZPcHhSVzFDeTRZZ1VfWHE1M2RibXV3RUh1RFI2VVl2QTZFNDYxNkVqRVJkbVFLRjh6aGNiUzNQdEU?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div><div class="article-card" data-topic="networking" data-text="mba graduates rethink career paths in a slower job market find mba mba graduates rethink career paths in a slower job market  find mba"
      style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #6d28d9;border-radius:8px;
             padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
@@ -1753,153 +1835,48 @@
   <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">How the Alumni Drive Babson’s Successes · Babson Magazine  Babson College</p>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Babson College</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Nov 10, 2025</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1rejk4NTBpZ09RdHU4WUlqSVNrRXR5WUNWVDNKb2JXS3BDekpsSXVDamNIYmpGSVU4SDFJRXFwWTROblA5MkZSN0d3YnlHbWxTcGZPZE01ZEl3d2tsZC1QdjVCdWNSUmc?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6d28d9;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
 </div>
-</div><div id="mccombs" style="margin-bottom:44px;">
-  <div style="display:flex;align-items:center;gap:12px;background:#FDF0E8;
-       border:1px solid #F4C6A0;border-radius:10px;padding:14px 20px;margin-bottom:18px;">
-    <span style="font-size:24px;">🤘</span>
-    <div>
-      <div style="font-size:16px;font-weight:800;color:#BF5700;font-family:Georgia,serif;">
-        McCombs MBA
-      </div>
-      <div style="font-size:12px;color:#64748b;margin-top:2px;">6 articles found</div>
-    </div>
-    <a href="#top" style="margin-left:auto;font-size:11px;color:#94a3b8;text-decoration:none;"
-       onmouseover="this.style.color='#BF5700'" onmouseout="this.style.color='#94a3b8'">↑ Top</a>
-  </div>
-  <div class="article-card" data-topic="mccombs" data-text="nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin the university of texas at austin nexxus strengthens cross-disciplinary healthcare entrepreneur preparation at ut austin  the university of texas at austin"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDRPd3VyVlIzTi1QSHNFLVQtcU1JWmNORnlxNVAyd2tab2JSZkFsZl9qUlo2ajhJNWZid0JHWG1wOHFoeS1oSF9EdFlydDZLNG9iNzN4T0thdlVQMWNSbVE5M1ZlZzRRU0lTYlY0Y195RkxCMC1OMjhTV1RPVTFtZUZUUlVjcjNaWFhNSmpXeDJGdjhIYUNWQXdPdEU5TkQ3UkoyaE5meDNUTG40UVVKMkJlN3Y3X28?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">NEXXUS Strengthens Cross-Disciplinary Healthcare Entrepreneur Preparation at UT Austin</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">NEXXUS Strengthens Cross-Disciplinary Healthcare Entrepreneur Preparation at UT Austin  The University of Texas at Austin</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">The University of Texas at Austin</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 20, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDRPd3VyVlIzTi1QSHNFLVQtcU1JWmNORnlxNVAyd2tab2JSZkFsZl9qUlo2ajhJNWZid0JHWG1wOHFoeS1oSF9EdFlydDZLNG9iNzN4T0thdlVQMWNSbVE5M1ZlZzRRU0lTYlY0Y195RkxCMC1OMjhTV1RPVTFtZUZUUlVjcjNaWFhNSmpXeDJGdjhIYUNWQXdPdEU5TkQ3UkoyaE5meDNUTG40UVVKMkJlN3Y3X28?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="mccombs" data-text="ut names new dean to lead mccombs school of business austin american-statesman ut names new dean to lead mccombs school of business  austin american-statesman"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQY1RWanNRZmZhU2N1RTNVc3RMRTNUcGI0R01CSkNzZnF3eDhON2NGcEtuMlNzYko5UnhCalBUNTY2ZWI0Vy1oOUVvcFlxOVRrNXpxbV9hczZFb1huTjcyaDJrS0JMbktiUld0WWRIcWphZHgxVVUya0MyYW9pQnhsOEtUdnIxOGZDbXFGcmpJNXhaRDFzelBSUHVwX0tRaW43cEZlZlBnMGU5Y01CSEc1ZjZR?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">UT names new dean to lead McCombs School of Business</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">UT names new dean to lead McCombs School of Business  Austin American-Statesman</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Austin American-Statesman</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">May 01, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQY1RWanNRZmZhU2N1RTNVc3RMRTNUcGI0R01CSkNzZnF3eDhON2NGcEtuMlNzYko5UnhCalBUNTY2ZWI0Vy1oOUVvcFlxOVRrNXpxbV9hczZFb1huTjcyaDJrS0JMbktiUld0WWRIcWphZHgxVVUya0MyYW9pQnhsOEtUdnIxOGZDbXFGcmpJNXhaRDFzelBSUHVwX0tRaW43cEZlZlBnMGU5Y01CSEc1ZjZR?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="mccombs" data-text="bradley staats appointed dean of mccombs school of business ut austin news bradley staats appointed dean of mccombs school of business  ut austin news"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPZlBGOTg2NUlTTE04NmxyUnFoY2ViS1ZzTWg0T3FoeGdPc2JqT1A3OFJqaG5yUzJkeWpoUDZ3ZWRod3R4UXd1cVRhRW9YNnFMWGVrdHdfd1VheWdrX21qZHhOV2NjOXBNZkhHMEh2MFB0Zk5Ga21kcUo0YndyOGxNUWxxeWkzRXBiS3NLbEprcjhQTzhtOE1jMkt5VQ?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Bradley Staats Appointed Dean of McCombs School of Business</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Bradley Staats Appointed Dean of McCombs School of Business  UT Austin News</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">UT Austin News</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 30, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPZlBGOTg2NUlTTE04NmxyUnFoY2ViS1ZzTWg0T3FoeGdPc2JqT1A3OFJqaG5yUzJkeWpoUDZ3ZWRod3R4UXd1cVRhRW9YNnFMWGVrdHdfd1VheWdrX21qZHhOV2NjOXBNZkhHMEh2MFB0Zk5Ga21kcUo0YndyOGxNUWxxeWkzRXBiS3NLbEprcjhQTzhtOE1jMkt5VQ?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="mccombs" data-text="texas mccombs expands md-mba pipeline to houston with new dual degree poets&amp;quants texas mccombs expands md-mba pipeline to houston with new dual degree  poets&amp;quants"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNekFXLUw1Mi12c0tWM01SS1Zmdl9Nb1Z3Mm9UVzdlNFh5elhUZUt2eU5JS2VmWWFSSGliNUNRb3hwclpxMGFXbTB3WERVazZvdXVuVjkzQ0lDM1hJZG5QU0I4Znc0NW02RXhmNTdWek5KTlA0cndtT3FmX2Y4aFpyUTBUcWlWZzE3UEtVcml0eEhWdmExUzdHMkE5SWlCUVNXZ1RoOGxrLWdJRFJ1?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">Texas McCombs Expands MD-MBA Pipeline To Houston With New Dual Degree</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">Texas McCombs Expands MD-MBA Pipeline To Houston With New Dual Degree  Poets&amp;Quants</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Poets&amp;Quants</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Apr 27, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNekFXLUw1Mi12c0tWM01SS1Zmdl9Nb1Z3Mm9UVzdlNFh5elhUZUt2eU5JS2VmWWFSSGliNUNRb3hwclpxMGFXbTB3WERVazZvdXVuVjkzQ0lDM1hJZG5QU0I4Znc0NW02RXhmNTdWek5KTlA0cndtT3FmX2Y4aFpyUTBUcWlWZzE3UEtVcml0eEhWdmExUzdHMkE5SWlCUVNXZ1RoOGxrLWdJRFJ1?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="mccombs" data-text="ut business school opening at city centre realty news report ut business school opening at city centre  realty news report"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE5IUXRUVVhtYm5xR0F1TmhfZFRZVEw0bTNXcGZXZlNwY2RjODdQdjhhOGN0MXQzSTVmYVZvUjVwSU1JU1UxNDZ6dXFxU19aWjVEY1J0TjVlam1IbWNRWDZ4eGw5US1vUjJVV0czNmV1R1RGLVFiS2syOWxmbw?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">UT Business School Opening at City Centre</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">UT Business School Opening at City Centre  Realty News Report</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Realty News Report</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Jan 14, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE5IUXRUVVhtYm5xR0F1TmhfZFRZVEw0bTNXcGZXZlNwY2RjODdQdjhhOGN0MXQzSTVmYVZvUjVwSU1JU1UxNDZ6dXFxU19aWjVEY1J0TjVlam1IbWNRWDZ4eGw5US1vUjJVV0czNmV1R1RGLVFiS2syOWxmbw?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div><div class="article-card" data-topic="mccombs" data-text="what are the best business schools in texas? graduate management admission council what are the best business schools in texas?  graduate management admission council"
-     style="background:#fff;border:1px solid #e8e0d8;border-left:4px solid #BF5700;border-radius:8px;
-            padding:16px 18px;margin-bottom:12px;transition:all 0.2s ease;"
-     onmouseover="this.style.background='#faf7f4';this.style.boxShadow='0 4px 14px rgba(191,87,0,0.1)'"
-     onmouseout="this.style.background='#fff';this.style.boxShadow='none'">
-  <div style="font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.45;">
-    <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNTUJNa3o3TDRGVEZfUm9Za3UtdllycGgwSlRkYXVkQ1gycXJOTlZiZHpYSHV1NE1qQlBLRXZiSHladnFPaXdZZVN2NWFWaDR3N3RZUUcwUjFjandRTUFpM1o5WWpQWXF2blFSc2F5TmdfZG43VTRTc0kycXlXSE43Q1Z4MEVvQzJpcm1Ib0NfcUV0M1hybFJNMGhn?oc=5" target="_blank" rel="noopener noreferrer"
-       style="color:#BF5700;text-decoration:none;"
-       onmouseover="this.style.textDecoration='underline'"
-       onmouseout="this.style.textDecoration='none'">What are the best business schools in Texas?</a>
-  </div>
-  <p style="font-size:13.5px;color:#475569;margin:0 0 10px;line-height:1.65;">What are the best business schools in Texas?  Graduate Management Admission Council</p>
-  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"><span style="font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;font-family:monospace;">Graduate Management Admission Council</span> <span style="color:#e2e8f0;">·</span> <span style="font-size:11px;color:#94a3b8;">Jan 09, 2026</span> <span style="color:#e2e8f0;">·</span> <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNTUJNa3o3TDRGVEZfUm9Za3UtdllycGgwSlRkYXVkQ1gycXJOTlZiZHpYSHV1NE1qQlBLRXZiSHladnFPaXdZZVN2NWFWaDR3N3RZUUcwUjFjandRTUFpM1o5WWpQWXF2blFSc2F5TmdfZG43VTRTc0kycXlXSE43Q1Z4MEVvQzJpcm1Ib0NfcUV0M1hybFJNMGhn?oc=5" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#BF5700;text-decoration:none;font-weight:700;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Read article →</a></div>
-</div>
-</div>
-    </div>
+</div></div>
 
     <!-- Footer -->
     <div style="border-top:3px solid #BF5700;padding-top:22px;margin-top:8px;text-align:center;">
-      <div style="font-size:13px;font-weight:800;color:#BF5700;margin-bottom:4px;">
-        Chris's MBA Insider News
-      </div>
+      <div style="font-size:13px;font-weight:800;color:#BF5700;margin-bottom:4px;">Chris's MBA Insider News</div>
       <div style="font-size:12px;color:#94a3b8;line-height:1.9;">
-        Auto-generated weekly · May 23, 2026 · Generated 03:15 PM UTC, May 23 2026<br/>
-        Powered by Google News RSS · Click any headline to read the original article.<br/>
+        Auto-generated daily · May 23, 2026 · 03:23 PM UTC<br/>
+        Powered by Google News RSS · Articles sorted by date · Click any headline to read the original.<br/>
         <span style="color:#cbd5e1;">100% free · No API keys · Runs automatically on GitHub Actions</span>
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
-  // All article cards for search (stored as data attributes)
   const allCards = document.querySelectorAll('#search-cards .article-card');
-
   function filterArticles(query) {
     const q = query.trim().toLowerCase();
     const topicSections = document.getElementById('topic-sections');
     const searchResults = document.getElementById('search-results');
-    const tocSection = document.getElementById('toc-section');
-    const searchTerm = document.getElementById('search-term');
-    const resultCount = document.getElementById('result-count');
-    const noResults = document.getElementById('no-results-msg');
-
+    const tocSection    = document.getElementById('toc-section');
+    const searchTerm    = document.getElementById('search-term');
+    const resultCount   = document.getElementById('result-count');
+    const noResults     = document.getElementById('no-results-msg');
     if (!q) {
-      // Show normal view
       topicSections.style.display = 'block';
       searchResults.style.display = 'none';
-      tocSection.style.display = 'block';
+      tocSection.style.display    = 'block';
       return;
     }
-
-    // Switch to search view
     topicSections.style.display = 'none';
-    tocSection.style.display = 'none';
+    tocSection.style.display    = 'none';
     searchResults.style.display = 'block';
     searchTerm.textContent = query;
-
     let visible = 0;
     allCards.forEach(card => {
-      const text = card.getAttribute('data-text') || '';
-      const match = text.includes(q);
+      const match = (card.getAttribute('data-text') || '').includes(q);
       card.style.display = match ? 'block' : 'none';
       if (match) visible++;
     });
-
-    resultCount.textContent = visible > 0 ? `(${visible} article${visible !== 1 ? 's' : ''})` : '';
-    noResults.style.display = visible === 0 ? 'block' : 'none';
+    resultCount.textContent  = visible > 0 ? `(${visible} article${visible !== 1 ? 's' : ''})` : '';
+    noResults.style.display  = visible === 0 ? 'block' : 'none';
   }
 </script>
 </body>
